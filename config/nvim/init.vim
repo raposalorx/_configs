@@ -1,0 +1,200 @@
+" Plug {{{
+call plug#begin('~/.config/nvim/plugged')
+" ale linters needed:
+"   vint - vim
+"   shellcheck - sh/bash
+"   checkmake - Makefile
+"   yamllint - YAML
+"   hadolint - Dockerfile
+"   luac luacheck - lua
+"   perl-critic - perl
+"   flawfinder - c/++
+"   proselint writegood - text
+"
+"   python - flake8, pylint -- fixers: black, isort
+Plug 'w0rp/ale' " async linting
+Plug 'donRaphaco/neotex', { 'for': 'tex' }
+"Plug 'ledger/vim-ledger', { 'for': 'ledger' } " ledger
+Plug 'SirVer/ultisnips' " ultisnips
+Plug 'morhetz/gruvbox'
+Plug 'Yggdroot/indentLine'
+Plug 'godlygeek/tabular'
+Plug 'ludovicchabant/vim-gutentags'
+Plug 'skywind3000/gutentags_plus'
+
+"Plug 'davidhalter/jedi-vim'
+Plug 'junegunn/fzf', { 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-obsession'
+
+call plug#end()
+"}}}
+
+" Basics {{{
+let mapleader = ','
+
+syntax on
+colorscheme gruvbox
+set termguicolors
+
+"Make sure directories exist
+if !isdirectory($HOME.'/.vim-tmp')
+    call mkdir($HOME.'/.vim-tmp', '', 0770)
+endif
+if !isdirectory($HOME.'/.vim-tmp/backup')
+    call mkdir($HOME.'/.vim-tmp/backup', '', 0700)
+endif
+if !isdirectory($HOME.'/.vim-tmp/swp')
+    call mkdir($HOME.'/.vim-tmp/swp', '', 0700)
+endif
+if !isdirectory($HOME.'/.vim-tmp/undo')
+    call mkdir($HOME.'/.vim-tmp/undo', '', 0700)
+endif
+"}}}
+
+" Sets {{{
+" set nocompatible
+set modelines=1
+set number
+" set relativenumber
+set scrolloff=3 " keep at least 3 lines at top or bottom while scrolling
+set showmode
+set showcmd
+set wildmenu " nice prediction menu
+set wildmode=list:longest " list matches and complete till longest common match
+set visualbell " shutup
+set cursorline
+set ruler " line/col numbers
+set backspace=indent,eol,start " backspace through newlines and indents
+set concealcursor=nc " conceal in normal/command modes
+set conceallevel=0
+set nowrap
+set encoding=utf-8
+scriptencoding=utf-8
+set list
+set listchars=tab:▸\ ,eol:␣
+set history=1000 " history of :cmd
+set backupdir=~/.vim-tmp/backup//
+set directory=~/.vim-tmp/swp//
+set foldmethod=marker
+
+" format options
+set formatoptions-=r " don't auto insert comment lines
+set formatoptions-=o " ""
+set formatoptions-=c " don't autowrap comments
+set formatoptions-=q " format comments gq
+set formatoptions-=wa " auto-format paragraphs, trailing whitespace means a continued paragraph
+set formatoptions+=j " join comments sanely
+
+"tabline - plugin/tabline.vim
+set showtabline=1 "only if there are tabs
+set tabline=%!MyTabLine()
+
+"undo persistance
+set undodir=~/.vim-tmp/undo//
+set undofile
+set undolevels=1000
+set undoreload=10000
+
+" Hell with tabs
+set tabstop=2 softtabstop=2 shiftwidth=2 expandtab
+
+let g:neotex_enabled=2
+let g:neotex_subfile=1
+"}}} 
+
+" Statusline {{{
+set laststatus=2 "always have a statusline
+set statusline= "clear statusline
+set statusline+=%h%m%r%w "flags
+set statusline+=%1*%-3.3n%* "buffer
+set statusline+=%f "filename
+set statusline+=%1*%y%* "filetype
+set statusline+=%L "total lines
+set statusline+=%= "right align
+set statusline+=%{ObsessionStatus()}
+set statusline+=[%{LinterStatus()}]
+set statusline+=%{FugitiveStatusline()}
+"}}}
+
+" Remaps {{{
+"make Y behave like C and D
+nnoremap Y y$
+
+" I'm too used to jj for ESC and ^[
+" inoremap jj <ESC>
+
+" better search
+nnoremap / /\v
+vnoremap / /\v
+nnoremap ? ?\v
+vnoremap ? ?\v
+nnoremap % :%s/\v
+set ignorecase
+set smartcase
+set gdefault
+set incsearch
+set showmatch
+set hlsearch
+nnoremap <leader><space> :noh<cr>
+nnoremap <tab> %
+vnoremap <tab> %
+
+" no stupid help
+inoremap <F1> <ESC>
+nnoremap <F1> <ESC>
+vnoremap <F1> <ESC>
+
+"nice j and k
+nnoremap j gj
+nnoremap k gk
+
+"nice sideways scroll
+nnoremap zh zH
+nnoremap zl zL
+
+" kill trailing whitespaces
+"nnoremap <leader>W :%s/\s\+$//<cr>:let @/=''<CR>
+
+" new selected split
+"nnoremap <leader>w <C-w>v<C-w>l
+" better split movement
+nnoremap <C-h>      <C-w>h
+nnoremap <C-j>      <C-w>j
+nnoremap <C-k>      <C-w>k
+nnoremap <C-l>      <C-w>l
+nnoremap <C-w><C-h> <C-w>H
+nnoremap <C-w><C-j> <C-w>J
+nnoremap <C-w><C-k> <C-w>K
+nnoremap <C-w><C-l> <C-w>L
+
+"ale keys
+nnoremap <leader>n :ALENextWrap<CR>
+nnoremap <leader>p :ALEPreviousWrap<CR>
+
+"ultisnip
+" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
+let g:UltiSnipsExpandTrigger='<tab>'
+let g:UltiSnipsJumpForwardTrigger='<c-b>'
+let g:UltiSnipsJumpBackwardTrigger='<c-z>'
+
+" If you want :UltiSnipsEdit to split your window.
+let g:UltiSnipsEditSplit='vertical'
+let g:UltiSnipsSnippetsDir=$HOME.'/.config/nvim/ultisnips/'
+let g:UltiSnipsSnippetDirectories=[$HOME.'/.config/nvim/ultisnips/']
+
+" switch ` and ' for marks
+nnoremap ' `
+nnoremap ` '
+
+" sudo write
+ca w!! w !sudo tee >/dev/null "%"
+
+" turn on and off spelling
+map <F8> :setlocal spell spelllang=en_gb<CR>
+map <F10> :setlocal nospell<CR>
+"}}}

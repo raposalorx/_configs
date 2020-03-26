@@ -1,0 +1,31 @@
+priority 0
+#extends c
+
+# Options
+# b - first word on line
+# i - in-word, not whitespace proceded
+# w - word boundry
+# r - python regex, must be quoted
+# t - ignore tabs
+# s - remove whitespace
+# m - trim all whitespace from snips
+# e - wierd python triggers
+# A - auto-trigger
+
+# backticks work `#!/usr/bin/perl
+# @a = localtime(); print $a[3] . '.' . $a[4] . '.' . ($a[5]+1900);`
+# so is viml `!v indent(".")`
+# so is python, look at the real docs, lots of fancy stuff
+
+snippet new "new snip file" b
+priority 0
+`!p snip.rv = "#extends"` ${1:c}
+
+${0:${VISUAL}}
+endsnippet
+
+snippet "snip(pet)?" "snippet..endsnippet" br
+`!p snip.rv = "snippet"` ${1:Tab_trigger} "${2:Description}" ${3:b}
+${0:${VISUAL}}
+`!p snip.rv = "endsnippet"`
+endsnippet

@@ -1,0 +1,23 @@
+priority 0
+#extends c
+
+snippet new "New post" b
+---
+layout: post
+title: "${1:Post title}"
+description: "${2:Post description}"
+categories: [${3:cat}]
+tags: [${4:tag1, tag2}]
+---
+
+* TOC
+{:toc .toc}
+
+${0}
+endsnippet
+
+snippet code "Code block with language" b
+{% highlight ${1:lang} ${2:linenos} %}
+${0}
+{% endhighlight %}
+endsnippet

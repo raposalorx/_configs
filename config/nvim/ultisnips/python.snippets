@@ -1,0 +1,44 @@
+priority 0
+
+snippet #! "Python script" b
+#!/usr/bin/env python
+import argparse
+import re
+import sys
+
+def main(argv):
+	parser = argparse.ArgumentParser(description="${1:My app description}")
+	#parser.add_argument("arg", help="help")
+	args = parser.parse_args()
+	$0
+
+
+if __name__ == "__main__":
+	main(sys.argv)
+endsnippet
+
+snippet file "open a file" b
+with open("${1:filename}") as f:
+	$0
+endsnippet
+
+snippet doc "Single line docstring" b
+""" ${1:type}: ${0:description}
+"""
+endsnippet
+
+snippet docstr "Full Multi line docstring" b
+""" ${0:description}
+
+Args:
+	${1:arg1} ${2:type}: ${3:description}
+
+Returns:
+	${4:type}: ${5:description}
+
+Examples:
+	>>> ${6:example}
+	${7:output}
+"""
+endsnippet
+

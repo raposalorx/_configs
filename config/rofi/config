@@ -1,0 +1,26 @@
+! vim: ft=xdefaults
+
+! rofi
+rofi.modi: run,windowcd
+rofi.font: Fira Mono 12
+rofi.width: 33
+rofi.lines: 8
+rofi.columns: 1
+rofi.terminal: termite
+rofi.ssh-command: {terminal} -e '{ssh-client} {host}'
+!                    bg       fg      altbg    hlbg     hlfg
+rofi.color-normal: #262626, #ebdbb2, #262626, #ebdbb2, #262626
+rofi.color-urgent: #262626, #ebdbb2, #262626, #ebdbb2, #262626
+rofi.color-active: #262626, #ebdbb2, #262626, #ebdbb2, #262626
+rofi.color-window: #262626, #ebdbb2, #ebdbb2
+rofi.bw: 2
+! location: 1 2 3 / 8 0 4 / 7 6 5
+rofi.location: 0
+rofi.padding: 10
+rofi.matching: fuzzy
+rofi.fuzzy: true
+rofi.auto-select: true
+rofi.sort: true
+rofi.sorting-method: fzf
+rofi.separator-style: solid
+rofi.hide-scrollbar: true
