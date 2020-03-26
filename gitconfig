@@ -1,0 +1,17 @@
+[user]
+	email = brian@fulso.me
+	name = Brian Robertson
+[diff]
+	tool = vimdiff
+[difftool]
+	prompt = false
+[alias]
+	d = difftool
+[core]
+	excludesfile = /home/lorx/.gitignore_global
+[push]
+	default = matching
+[mergetool "fugitive"]
+	cmd = nvim -f -c \"Gvdiff\" \"$MERGED\"
+[merge]
+	tool = fugitive

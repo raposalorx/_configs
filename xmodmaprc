@@ -1,0 +1,23 @@
+clear Lock
+keysym Caps_Lock = Control_L
+add Control = Control_L
+!remove mod1 = Alt_L
+!remove mod1 = Alt_R
+!remove mod1 = Meta_L
+!remove mod1 = Meta_R
+!remove mod4 = Super_L
+!remove mod4 = Super_R
+!add mod1 = Super_L
+!add mod1 = Super_R
+!add mod4 = Alt_L
+!add mod4 = Alt_R
+!add mod4 = Meta_L
+!add mod4 = Meta_R
+!remove Lock = Caps_Lock
+!add Control = Caps_Lock
+!remove mod1 = Alt_R
+!keycode 108 = Multi_key
+!clear Lock
+!keysym Caps_Lock = Control_L
+!add Control = Caps_Lock
+
