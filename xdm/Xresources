@@ -1,8 +1,6 @@
 Xcursor.theme: Adwaita
 Xcursor.size: 16
 
-
-
 xlogin*login.translations: #override \
 	Ctrl<Key>R: abort-display()\n\
 	<Key>F1: set-session-argument(failsafe) finish-field()\n\
@@ -20,35 +18,35 @@ xlogin*login.translations: #override \
 # DISPLAY_NUM is the display num
 # man xrdb
 
-xlogin*greeting: Welcome to Slackware
-xlogin*namePrompt: ::
-#\040\040\040\040\040\040\040Login:
-xlogin*passwdPrompt: ::
-xlogin*echoPasswd: false
-xlogin*fail: Login incorrect or forbidden by policy
+xlogin.Login.greeting: Welcome to Linux
+xlogin.Login.namePrompt: Username:\040
+##\040\040\040\040\040\040\040Login:
+xlogin.Login.passwdPrompt: Password:\040
+xlogin.Login.echoPasswd: true
+xlogin.Login.fail: Login incorrect or forbidden by policy
 
-xlogin.Login.greetFace: Monospace-13
-xlogin.Login.face: Monospace-12
-xlogin.Login.promptFace: Monospace-12:style=Bold
-xlogin.Login.failFace: Monospace-12:style=Bold
+xlogin.Login.greetFace: Fira Code-13
+xlogin.Login.face: Fira Code-12
+xlogin.Login.promptFace: Fira Code-12:style=Bold
+xlogin.Login.failFace: Fira Code-12:style=Bold
 
 xlogin.Login.borderWidth: 0
 xlogin.Login.frameWidth: 0
 xlogin.Login.innerFramesWidth: 0
 xlogin.Login.sepWidth: 0
 
-xlogin.Login.width: 330
-xlogin.Login.height: 165
+xlogin.Login.width: 640
+xlogin.Login.height: 200
 
 xlogin.Login.background: #262626
 xlogin.Login.foreground: #ebdbb2
-xlogin.Login.inpColor: #ebdbb2
 
+xlogin.Login.inpColor: #262626
 xlogin.Login*shdColor: #262626
 xlogin.Login*hiColor: #262626
 
-*Background: #ebdbb2
-*Foreground: #ebdbb2
+*background: #262626
+*foreground: #ebdbb2
 
 xlogin.Login.greetColor: #ebdbb2
 xlogin.Login.promptColor: #ebdbb2

@@ -1,11 +1,49 @@
 ;:set syn=dosini
 
-[global/wm]
-#margin-top = 8
-#margin-bottom = 8
-#margin-left = 8
-#margin-right = 8
+; {{{ Settings
+[settings]
 
+throttle-output = 5
+throttle-output-for = 10
+throttle-input-for = 30
+
+screenchange-reload = false
+
+compositing-background = source
+compositing-foreground = over
+compositing-overline = over
+compositing-underline = over
+compositing-border = over
+
+pseudo-transparency = false
+; }}}
+; {{{ Vars
+[color]
+bg0 = #282828
+bg1 = #3c3836
+bg2 = #504945
+bg3 = #665c54
+bg4 = #7c6f64
+fg0 = #fbf1c7
+fg1 = #ebdbb2
+fg2 = #d5c4a1
+fg3 = #bdae93
+fg4 = #a89984
+
+bg = ${color.bg0}
+fg = ${color.fg1}
+
+orange = #fe8019
+grep = #928374
+red = #fb4934
+green = #b8bb26
+yellow = #fabd2f
+blue = #83a598
+purple = #d3869b
+aqua = #8ec07c
+
+
+trans = #00000000
 
 [colors]
 ;orange = #FF6200
@@ -29,9 +67,13 @@ primary = #1f222d
 secondary = #FF6200
 alert = #fb4934
 
+; }}}
+; {{{ Default
 [bar/base]
 bottom = true
 wm-restack = bspwm
+
+monitor = ${env:MONITOR}
 
 locale = en_US.UTF-8
 
@@ -43,11 +85,11 @@ padding-right = 0
 module-margin-right = 0
 module-margin-left = 0
 
-background = ${colors.background}
-foreground = ${colors.foreground}
+background = ${color.bg}
+foreground = ${color.fg}
 
 underline-size = 0
-underline-color = ${colors.white}
+underline-color = ${color.fg}
 
 tray-detached = false
 tray-position = 
@@ -58,25 +100,53 @@ tray-padding = 0
 ;tray-transparent = false
 tray-scale = 1.0
 
-font-0 = "fira mono:size=8;2"
+font-0 = "fira code:size=8;2"
 font-1 = "Font Awesome 5 Free Regular:size=8;2"
 font-2 = "Font Awesome 5 Brands Regular:size=8;2"
 font-3 = "Font Awesome 5 Free Solid:size=8;2"
+font-4 = "Inconsolata Nerd Font:size=12;2"
 
-radius = 7
-
-height = 16
-
-[bar/lapwm]
+radius = 12
+height = 24
+; }}}
+; {{{ Bars
+[bar/wm]
 inherit = bar/base
 bottom = true
 
-monitor = eDP
 width = 580
-offset-x = 7
-offset-y = 7
+offset-x = 0
+offset-y = 0
 
 modules-left = bspwm
+
+[bar/topright]
+inherit = bar/base
+bottom = false
+
+width = ${env:TOP_RIGHT_WIDTH}
+offset-x = ${env:TOP_RIGHT_OFFSET}
+offset-y = 0
+
+#modules-left = bspwm
+#modules-center = mpd 
+modules-right = pulseaudio right1 network right2 date
+
+forground = ${color.fg}
+background = ${color.bg}
+
+tray-position = right
+tray-padding = 5
+
+[bar/bottomright]
+inherit = bar/base
+bottom = true
+
+width = ${env:BOTTOM_RIGHT_WIDTH}
+offset-x = ${env:BOTTOM_RIGHT_OFFSET}
+offset-y = 0
+
+modules-right = filesystem
 
 [bar/lapspecific]
 inherit = bar/base
@@ -85,26 +155,42 @@ bottom = true
 monitor = eDP
 width = 150
 offset-x = 1209
-offset-y = 7
+offset-y = 0
 
 modules-center = battery
+; }}}
+; {{{ Seperators
+[module/left1]
+type = custom/text
+content-background = ${color.shade2}
+content-foreground = ${color.shade1}
+content = "%{T4}%{T-}"
 
-[bar/lapright]
-inherit = bar/base
-bottom = false
+[module/right1]
+type = custom/text
+content-background = ${color.bg0}
+content-foreground = ${color.bg1}
+content = "%{T4}%{T-}"
 
-monitor = eDP
-width = 400
-offset-x = 959
-offset-y = 7
+[module/right2]
+type = custom/text
+content-background = ${color.bg1}
+content-foreground = ${color.bg2}
+content = "%{T4}%{T-}"
 
-#modules-left = bspwm
-#modules-center = mpd 
-modules-right = volume separator network separator date
+[module/right3]
+type = custom/text
+content-background = ${color.bg2}
+content-foreground = ${color.bg3}
+content = "%{T4}%{T-}"
 
-tray-position = right
-tray-padding = 5
-
+[module/right4]
+type = custom/text
+content-background = ${color.bg3}
+content-foreground = ${color.bg4}
+content = "%{T4}%{T-}"
+; }}}
+; {{{ Modules
 [module/mpd]
 type = internal/mpd
 host = 127.0.0.1
@@ -113,7 +199,6 @@ format-online =<icon-prev><label-song><icon-next>
 format-online-underline = ${colors.white}
 format-online-padding = 1
 
-#label-song-font = 4
 label-song = %{A1:mpc toggle:}%artist% - %title%%{A}
 icon-play = 
 icon-pause = 
@@ -227,108 +312,95 @@ date = %{F#928374}%{F-} %m/%d %H:%M:%S
 interval = 1
 format-underline = ${colors.white}
 ;format-background = ${colors.black}
-format-foreground = ${colors.foreground}
-format-padding = 1
+format-foreground = ${color.fg2}
+format-background = ${color.bg2}
+label-padding = 1
 
 label-separator = |
 
-[module/volume]
-type = internal/volume
+[module/pulseaudio]
+type = internal/pulseaudio
+; max at 100%
+use-ui-max = false
+interval = 1
 
-format-volume = <label-volume> 
-format-volume-padding = 1
+; <bar-volume>
+format-volume = <label-volume>
+label-volume =  %percentage%%
+#label-volume-foreground = ${root.foreground}
+format-volume-foreground = ${color.fg}
+format-volume-background = ${color.bg}
+label-volume-padding = 1
 
-format-volume-underline = ${colors.white}
+;format-muted-prefix = " "
+format-muted-foreground = ${colors.foreground-alt}
+label-muted = 
 
-label-volume = %{F#928374} %{F-}%percentage:3%%
-#label-volume-foreground = ${color.white}
-
-label-muted =%{F#928374} %{F-}mute
-format-muted = <label-muted>
-format-muted-underline = ${colors.white}
-format-muted-padding = 1
-#label-muted-foreground = ${colors.gray}
-
-format-padding = 1
+bar-volume-width = 10
+bar-volume-foreground-0 = #55aa55
+bar-volume-foreground-1 = #55aa55
+bar-volume-foreground-2 = #55aa55
+bar-volume-foreground-3 = #55aa55
+bar-volume-foreground-4 = #55aa55
+bar-volume-foreground-5 = #f5a70a
+bar-volume-foreground-6 = #ff5555
+bar-volume-gradient = true
+bar-volume-indicator = |
+bar-volume-indicator-font = 2
+bar-volume-fill = =
+bar-volume-fill-font = 2
+bar-volume-empty = -
+bar-volume-empty-font = 2
+bar-volume-empty-foreground = ${colors.foreground-alt}
 
 [module/network]
 type = internal/network
-interface = wlan0
-
-; Seconds to sleep between updates
-; Default: 1
+interface = ${env:NETWORK}
 interval = 3.0
 
-; Test connectivity every Nth update
-; A value of 0 disables the feature
-; NOTE: Experimental (needs more testing)
-; Default: 0
-;ping-interval = 3
-
-; @deprecated: Define min width using token specifiers (%downspeed:min% and %upspeed:min%)
-; Minimum output width of upload/download rate
-; Default: 3
-
-; Accumulate values from all interfaces
-; when querying for up/downspeed rate
-; Default: false
 accumulate-stats = true
 
-format-connected-padding = 1
-format-disconnected-padding = 1
+label-connected-padding = 1
+label-disconnected-padding = 1
 format-connected-underline = ${colors.white}
 format-disconnected-underline = ${colors.white}
 
-; Available tags:
-;   <label-connected> (default)
-;   <ramp-signal>
+format-connected-foreground = ${color.fg1}
+format-connected-background = ${color.bg1}
+
 format-connected = %{F#928374} %{F-}<label-connected> 
-
-; Available tags:
-;   <label-disconnected> (default)
 format-disconnected = <label-disconnected>
-
-; Available tags:
-;   <label-connected> (default)
-;   <label-packetloss>
-;   <animation-packetloss>
 format-packetloss = <animation-packetloss> <label-connected>
 
-; Available tokens:
-;   %ifname%    [wireless+wired]
-;   %local_ip%  [wireless+wired]
-;   %essid%     [wireless]
-;   %signal%    [wireless]
-;   %upspeed%   [wireless+wired]
-;   %downspeed% [wireless+wired]
-;   %linkspeed% [wired]
-; Default: %ifname% %local_ip%
 label-connected = %{F#aec795}%downspeed:08:8%%{F-} %signal:3%% %{F#c795ae}%upspeed:08:8%
-
-; Available tokens:
-;   %ifname%    [wireless+wired]
-; Default: (none)
 label-disconnected = %{F#928374} %{F-}none
 
-; Available tokens:
-;   %ifname%    [wireless+wired]
-;   %local_ip%  [wireless+wired]
-;   %essid%     [wireless]
-;   %signal%    [wireless]
-;   %linkspeed% [wired]
-; Default: (none)
-;label-packetloss = %essid%
-;label-packetloss-foreground = #eefafafa
-
-; Only applies if <animation-packetloss> is used
 animation-packetloss-0 = ⚠
 animation-packetloss-1 = 📶
-; Framerate in milliseconds
 animation-packetloss-framerate = 500
+
+[module/filesystem]
+type = internal/fs
+interval = 25
+
+mount-0 = /
+mount-1 = /home
+mount-2 = /media
+mount-3 = /mnt/stuff
+mount-4 = /mnt/usb
+
+label-mounted = %{F#aec795}%mountpoint%%{F-} %free%
+label-unmounted = 
+label-unmounted-foreground = ${colors.foreground-alt}
+
+label-mounted-padding = 0
+label-unmounted-padding = 0
+; }}}
 
 [module/separator]
 type = custom/text
 content = |
 content-foreground = #4e4e4e
+content-padding = 1
 
 ; vim:ft=dosini
