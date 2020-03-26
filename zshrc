@@ -21,7 +21,7 @@ export LC_ALL="en_US.UTF-8"
 export EDITOR="nvim"
 export PAGER="less -ri"
 export BROWSER="firefox"
-export PATH="$HOME/slackbin:$HOME/.bin:$HOME/.go/bin:/opt/hfs13.0.509/bin/:$HOME/.gem/ruby/2.3.0/bin:$HOME/bin-sym:$HOME/.local/bin:$PATH"
+export PATH="$HOME/slackbin:$HOME/.bin:$HOME/.go/bin:/opt/hfs13.0.509/bin/:$HOME/.gem/ruby/2.3.0/bin:$HOME/.bin-sym:$HOME/.local/bin:$PATH"
 
 export GOPATH="$HOME/.go"
 

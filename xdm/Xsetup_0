@@ -3,18 +3,13 @@
 #xconsole -geometry 480x130-0-0 -daemon -notify -verbose -fn fixed -exitOnFail
 
 # Fix backspace problem in login box:
-sysmodmap=/etc/X11/xinit/.Xmodmap
-if [ -f $sysmodmap ]; then
-	/usr/bin/xmodmap $sysmodmap
-fi
+#sysmodmap=/etc/X11/xinit/.Xmodmap
+#if [ -f $sysmodmap ]; then
+#	/usr/bin/xmodmap $sysmodmap
+#fi
 
 # If the nifty KDE background loader is around, use it:
-if [ -x /opt/kde/bin/kdmdesktop ]; then
-	/opt/kde/bin/kdmdesktop
-elif [ -x /usr/bin/kdmdesktop ]; then
-	/usr/bin/kdmdesktop
-else
-  compton --config /home/lorx/.config/compton/compton.conf -b &
-  feh --bg-fill /home/lorx/Downloads/160824.jpg
+compton --config /home/lorx/.config/compton/compton.conf -b &
+feh --bg-fill /home/lorx/.backs/0cGG4pV.jpg
+#xprop > /etc/X11/xdm/prop.txt
 #	/usr/bin/xsetroot -solid SteelBlue
-fi
