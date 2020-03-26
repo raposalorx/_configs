@@ -83,11 +83,11 @@ inherit = bar/base
 bottom = true
 
 monitor = eDP
-width = 150
-offset-x = 1209
+width = 550
+offset-x = 809
 offset-y = 7
 
-modules-center = battery
+modules-right = battery separator filesystem
 
 [bar/lapright]
 inherit = bar/base
@@ -104,6 +104,25 @@ modules-right = volume separator network separator date
 
 tray-position = right
 tray-padding = 5
+
+[module/filesystem]
+type = internal/fs
+interval = 25
+
+mount-0 = /
+mount-1 = /home
+mount-2 = /media
+mount-3 = /mnt/stuff
+mount-4 = /mnt/windows
+mount-5 = /mnt/usb
+
+label-mounted = %mountpoint%%{F-} %free%
+label-mounted-foreground = ${colors.secondary}
+label-unmounted = %mountpoint% N/A
+label-unmounted-foreground = ${colors.foreground-alt}
+
+format-mounted-padding = 1
+format-unmounted-padding = 0
 
 [module/mpd]
 type = internal/mpd
@@ -146,6 +165,9 @@ label-full = 
 format-charging = <animation-charging> <label-charging>
 
 format-discharging = <animation-discharging> <label-discharging>
+
+format-charging-padding = 1
+format-discharging-padding = 1
 
 label-charging = %percentage%% %consumption%W %time%
 
