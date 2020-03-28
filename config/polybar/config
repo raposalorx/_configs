@@ -34,7 +34,7 @@ bg = ${color.bg0}
 fg = ${color.fg1}
 
 orange = #fe8019
-grep = #928374
+grey = #928374
 red = #fb4934
 green = #b8bb26
 yellow = #fabd2f
@@ -113,166 +113,112 @@ height = 24
 [bar/wm]
 inherit = bar/base
 bottom = true
-
 width = 580
-offset-x = 0
-offset-y = 0
-
 modules-left = bspwm
 
 [bar/topright]
 inherit = bar/base
 bottom = false
-
 width = ${env:TOP_RIGHT_WIDTH}
 offset-x = ${env:TOP_RIGHT_OFFSET}
-offset-y = 0
-
-#modules-left = bspwm
-#modules-center = mpd 
-modules-right = pulseaudio right1 network right2 date
-
-forground = ${color.fg}
-background = ${color.bg}
-
+modules-right = pulseaudio right1 cpu right2 network right3 date
 tray-position = right
 tray-padding = 5
+
+[bar/topleft]
+inherit = bar/base
+bottom = false
+width = 500
+modules-left = todo left1 mail
 
 [bar/bottomright]
 inherit = bar/base
 bottom = true
-
 width = ${env:BOTTOM_RIGHT_WIDTH}
 offset-x = ${env:BOTTOM_RIGHT_OFFSET}
-offset-y = 0
-
 modules-right = filesystem
 
 [bar/lapspecific]
 inherit = bar/base
 bottom = true
-
 monitor = eDP
 width = 150
-offset-x = 1209
-offset-y = 0
-
+offset-x = 608
 modules-center = battery
 ; }}}
 ; {{{ Seperators
 [module/left1]
 type = custom/text
-content-background = ${color.shade2}
-content-foreground = ${color.shade1}
-content = "%{T4}%{T-}"
+content-background = ${color.bg0}
+content-foreground = ${color.bg1}
+content = "%{T5}%{T-}"
+
+[module/left2]
+type = custom/text
+content-background = ${color.bg1}
+content-foreground = ${color.bg2}
+content = "%{T5}%{T-}"
+
+[module/left3]
+type = custom/text
+content-background = ${color.bg2}
+content-foreground = ${color.bg3}
+content = "%{T5}%{T-}"
+
+[module/left4]
+type = custom/text
+content-background = ${color.bg3}
+content-foreground = ${color.bg4}
+content = "%{T5}%{T-}"
 
 [module/right1]
 type = custom/text
 content-background = ${color.bg0}
 content-foreground = ${color.bg1}
-content = "%{T4}%{T-}"
+content = "%{T5}%{T-}"
 
 [module/right2]
 type = custom/text
 content-background = ${color.bg1}
 content-foreground = ${color.bg2}
-content = "%{T4}%{T-}"
+content = "%{T5}%{T-}"
 
 [module/right3]
 type = custom/text
 content-background = ${color.bg2}
 content-foreground = ${color.bg3}
-content = "%{T4}%{T-}"
+content = "%{T5}%{T-}"
 
 [module/right4]
 type = custom/text
 content-background = ${color.bg3}
 content-foreground = ${color.bg4}
-content = "%{T4}%{T-}"
+content = "%{T5}%{T-}"
 ; }}}
 ; {{{ Modules
-[module/mpd]
-type = internal/mpd
-host = 127.0.0.1
-port = 6600
-format-online =<icon-prev><label-song><icon-next>
-format-online-underline = ${colors.white}
-format-online-padding = 1
-
-label-song = %{A1:mpc toggle:}%artist% - %title%%{A}
-icon-play = 
-icon-pause = 
-icon-prev = 
-icon-next = 
-
-icon-prev-foreground = ${colors.darkgray} 
-icon-next-foreground = ${colors.darkgray}
-
-icon-play-padding = 1
-icon-pause-padding = 1
-icon-prev-padding = 1
-icon-next-padding = 1
-label-song-padding = 1
-
-[module/battery]
-type = internal/battery
-time-format = %H:%M
-
-full-at = 99
-
-; $ ls -1 /sys/class/power_supply/
-battery = BAT1
-;adapter = ADP1
-
-poll-interval = 5
-
-label-full = 
-
-format-charging = <animation-charging> <label-charging>
-
-format-discharging = <animation-discharging> <label-discharging>
-
-label-charging = %percentage%% %consumption%W %time%
-
-label-discharging = %percentage%% %consumption%W %time%
-
-animation-charging-0 = 
-animation-charging-1 = 
-animation-charging-2 = 
-animation-charging-3 = 
-animation-charging-4 = 
-; Framerate in milliseconds
-animation-charging-framerate = 750
-
-animation-discharging-0 = 
-animation-discharging-1 = 
-animation-discharging-2 = 
-animation-discharging-3 = 
-animation-discharging-4 = 
-; Framerate in milliseconds
-animation-discharging-framerate = 500
-
+; {{{ wm
 [module/bspwm]
 type = internal/bspwm
 format = <label-state> <label-mode>
 
 label-focused = %icon%
-;label-focused-font = 1
-label-focused-background = ${colors.background-alt}
+;label-focused-background = ${colors.background-alt}
+label-focused-background = ${color.blue}
 ;label-focused-underline= ${colors.primary}
-label-focused-underline= ${colors.white}
+;label-focused-underline= ${colors.white}
+label-focused-foreground = ${color.bg}
 label-focused-padding = 1
 
 label-occupied = %icon%
-label-occupied-foreground = ${colors.darkgray}
+label-occupied-foreground = ${color.blue}
 label-occupied-padding = 1
 
 label-urgent = %icon%!
-label-urgent-background = ${colors.alert}
+label-urgent-background = ${color.red}
 label-urgent-padding = 1
 
 label-empty =  %icon%
-label-empty-foreground = ${colors.foreground-alt}
+label-empty-foreground = ${color.bg3}
 label-empty-padding = 1
 #
 #
@@ -303,21 +249,8 @@ ws-icon-19 = "20;20"
 ws-icon-20 = "21;21"
 ws-icon-21 = "22;22"
 ws-icon-default = 
-
-
-[module/date]
-type = internal/date
-#date-alt =   %A %H:%M 
-date = %{F#928374}%{F-} %m/%d %H:%M:%S
-interval = 1
-format-underline = ${colors.white}
-;format-background = ${colors.black}
-format-foreground = ${color.fg2}
-format-background = ${color.bg2}
-label-padding = 1
-
-label-separator = |
-
+; }}}
+; {{{ topright
 [module/pulseaudio]
 type = internal/pulseaudio
 ; max at 100%
@@ -353,6 +286,26 @@ bar-volume-empty = -
 bar-volume-empty-font = 2
 bar-volume-empty-foreground = ${colors.foreground-alt}
 
+[module/cpu]
+type = internal/cpu
+interval = 0.5
+format-background = ${color.bg1}
+format-foreground = ${color.orange}
+label-padding = 1
+
+format = <ramp-coreload>
+format-padding = 1
+
+ramp-coreload-spacing = 1
+ramp-coreload-0 = ▁
+ramp-coreload-1 = ▂
+ramp-coreload-2 = ▃
+ramp-coreload-3 = ▄
+ramp-coreload-4 = ▅
+ramp-coreload-5 = ▆
+ramp-coreload-6 = ▇
+ramp-coreload-7 = █
+
 [module/network]
 type = internal/network
 interface = ${env:NETWORK}
@@ -365,20 +318,49 @@ label-disconnected-padding = 1
 format-connected-underline = ${colors.white}
 format-disconnected-underline = ${colors.white}
 
-format-connected-foreground = ${color.fg1}
-format-connected-background = ${color.bg1}
+format-connected-foreground = ${color.fg2}
+format-connected-background = ${color.bg2}
 
 format-connected = %{F#928374} %{F-}<label-connected> 
 format-disconnected = <label-disconnected>
 format-packetloss = <animation-packetloss> <label-connected>
 
-label-connected = %{F#aec795}%downspeed:08:8%%{F-} %signal:3%% %{F#c795ae}%upspeed:08:8%
+label-connected = %{F#b8bb26}%downspeed:08:8%%{F-} %signal:3%% %{F#fb4934}%upspeed:08:8%
 label-disconnected = %{F#928374} %{F-}none
 
 animation-packetloss-0 = ⚠
 animation-packetloss-1 = 📶
 animation-packetloss-framerate = 500
 
+[module/date]
+type = internal/date
+#date-alt =   %A %H:%M 
+date = %{F#928374}%{F-} %m/%d %H:%M:%S
+interval = 1
+format-underline = ${colors.white}
+;format-background = ${colors.black}
+format-foreground = ${color.fg3}
+format-background = ${color.bg3}
+label-padding = 1
+
+label-separator = |
+; }}}
+; {{{ topleft
+[module/mail]
+type = custom/script
+exec = ${env:CHECKMAIL}
+interval = 5
+format-background = ${color.bg}
+label-padding = 1
+
+[module/todo]
+type = custom/script
+exec = ${env:TODO}
+interval = 5
+format-background = ${color.bg1}
+label-padding = 1
+; }}}
+; {{{ bottomright
 [module/filesystem]
 type = internal/fs
 interval = 25
@@ -389,18 +371,69 @@ mount-2 = /media
 mount-3 = /mnt/stuff
 mount-4 = /mnt/usb
 
-label-mounted = %{F#aec795}%mountpoint%%{F-} %free%
+format-foreground = ${color.fg}
+label-mounted = %mountpoint%%{F#8ec07c} %free%
 label-unmounted = 
 label-unmounted-foreground = ${colors.foreground-alt}
 
 label-mounted-padding = 0
 label-unmounted-padding = 0
 ; }}}
+; {{{ lapspecific
+[module/battery]
+type = internal/battery
+time-format = %H:%M
+full-at = 97
+; $ ls -1 /sys/class/power_supply/
+battery = BAT1
+;adapter = ADP1
+poll-interval = 5
+format-full-foreground = ${color.green}
+format-charging-foreground = ${color.aqua}
+format-discharging-foreground = ${color.red}
 
-[module/separator]
-type = custom/text
-content = |
-content-foreground = #4e4e4e
-content-padding = 1
+label-full = 
+format-charging = <animation-charging> <label-charging>
+format-discharging = <animation-discharging> <label-discharging>
+label-charging = %percentage%% %consumption%W %time%
+label-discharging = %percentage%% %consumption%W %time%
+
+animation-charging-0 = 
+animation-charging-1 = 
+animation-charging-2 = 
+animation-charging-3 = 
+animation-charging-4 = 
+animation-charging-framerate = 750
+
+animation-discharging-0 = 
+animation-discharging-1 = 
+animation-discharging-2 = 
+animation-discharging-3 = 
+animation-discharging-4 = 
+animation-discharging-framerate = 500
+; }}}
+[module/mpd]
+type = internal/mpd
+host = 127.0.0.1
+port = 6600
+format-online =<icon-prev><label-song><icon-next>
+format-online-underline = ${colors.white}
+format-online-padding = 1
+
+label-song = %{A1:mpc toggle:}%artist% - %title%%{A}
+icon-play = 
+icon-pause = 
+icon-prev = 
+icon-next = 
+
+icon-prev-foreground = ${colors.darkgray} 
+icon-next-foreground = ${colors.darkgray}
+
+icon-play-padding = 1
+icon-pause-padding = 1
+icon-prev-padding = 1
+icon-next-padding = 1
+label-song-padding = 1
+; }}}
 
 ; vim:ft=dosini

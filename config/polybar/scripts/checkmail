@@ -1,0 +1,87 @@
+#!/bin/bash
+
+orange="%{F#fe8019}"
+red="%{F#fb4934}"
+blue="%{F#83a598}"
+purple="%{F#d3869b}"
+grey="%{F#928374}"
+green="%{F#b8bb26}"
+yellow="%{F#fabd2f}"
+fg="%{F#ebdbb2}"
+
+
+totals=0
+
+brianme_pos=$(ls $HOME/.mail/brian@fulso.me/drafts/cur | wc -l)
+brianme_new=$(ls $HOME/.mail/brian@fulso.me/inbox/new | wc -l)
+brianme_cur=$(ls $HOME/.mail/brian@fulso.me/inbox/cur | wc -l)
+brianme_total=$(echo $brianme_new $brianme_cur +p | dc)
+brianme_time=$(tail -n1 $HOME/.mutt/sync.brian@fulso.me.time)
+totals=$(echo $totals $brianme_new +p | dc)
+
+brianca_pos=$(ls $HOME/.mail/brian@fulsome.ca/drafts/cur | wc -l)
+brianca_new=$(ls $HOME/.mail/brian@fulsome.ca/inbox/new | wc -l)
+brianca_cur=$(ls $HOME/.mail/brian@fulsome.ca/inbox/cur | wc -l)
+brianca_total=$(echo $brianca_new $brianca_cur +p | dc)
+brianca_time=$(tail -n1 $HOME/.mutt/sync.brian@fulsome.ca.time)
+totals=$(echo $totals $brianca_new +p | dc)
+
+brianrob_pos=$(ls $HOME/.mail/brian.robertson@msscripting.com/drafts/cur | wc -l)
+brianrob_new=$(ls $HOME/.mail/brian.robertson@msscripting.com/inbox/new | wc -l)
+brianrob_cur=$(ls $HOME/.mail/brian.robertson@msscripting.com/inbox/cur | wc -l)
+brianrob_total=$(echo $brianrob_new $brianrob_cur +p | dc)
+brianrob_time=$(tail -n1 $HOME/.mutt/sync.brian.robertson@msscripting.com.time)
+totals=$(echo $totals $brianrob_new +p | dc)
+
+raposa_pos=$(ls $HOME/.mail/raposa@msscripting.com/drafts/cur | wc -l)
+raposa_new=$(ls $HOME/.mail/raposa@msscripting.com/inbox/new | wc -l)
+raposa_cur=$(ls $HOME/.mail/raposa@msscripting.com/inbox/cur | wc -l)
+raposa_total=$(echo $raposa_new $raposa_cur +p | dc)
+raposa_time=$(tail -n1 $HOME/.mutt/sync.raposa@msscripting.com.time)
+totals=$(echo $totals $raposa_new +p | dc)
+
+omail_pos=$(ls $HOME/.mail/raposa.msscripting@gmail.com/drafts/cur | wc -l)
+omail_new=$(ls $HOME/.mail/raposa.msscripting@gmail.com/inbox/new | wc -l)
+omail_cur=$(ls $HOME/.mail/raposa.msscripting@gmail.com/inbox/cur | wc -l)
+omail_total=$(echo $omail_new $omail_cur +p | dc)
+omail_time=$(tail -n1 $HOME/.mutt/sync.raposa.msscripting@gmail.com.time)
+totals=$(echo $totals $omail_new +p | dc)
+
+isnew="$grey"
+if [ $totals -gt 0 ]
+then
+  isnew="$orange"
+fi
+printf '%s ' $isnew
+
+if [ $brianme_pos -gt 0 ]
+then
+  printf '%s%s' $purple $brianme_pos
+fi
+printf '%sBM%s%s%s/%s%s ' $grey $yellow $brianme_new $fg $green $brianme_total
+
+if [ $brianca_pos -gt 0 ]
+then
+  printf '%s%s' $purple $brianca_pos
+fi
+printf '%sBC%s%s%s/%s%s ' $grey $yellow $brianca_new $fg $green $brianca_total
+
+if [ $brianrob_pos -gt 0 ]
+then
+  printf '%s%s' $purple $brianrob_pos
+fi
+printf '%sBR%s%s%s/%s%s ' $grey $yellow $brianrob_new $fg $green $brianrob_total
+
+if [ $raposa_pos -gt 0 ]
+then
+  printf '%s%s' $purple $raposa_pos
+fi
+printf '%sRM%s%s%s/%s%s ' $grey $yellow $raposa_new $fg $green $raposa_total
+
+if [ $omail_pos -gt 0 ]
+then
+  printf '%s%s' $purple $omail_pos
+fi
+printf '%sOM%s%s%s/%s%s ' $grey $yellow $omail_new $fg $green $omail_total
+
+printf '%s%s' $grey $synctime
