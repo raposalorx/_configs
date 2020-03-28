@@ -2,14 +2,23 @@
 killall polybar
 
 (
+export CHECKMAIL=$HOME/.config/polybar/scripts/checkmail
+export TODO=$HOME/.config/polybar/scripts/todo
 export MONITOR=$(polybar -m | tail -1 | sed -e 's/:.*$//g')
 export NETWORK=$(ip addr | pcre2grep -M 'UP.*\n.*\n.*/24' | grep -oP '^\d*: \K[^:]*')
 export TOP_RIGHT_WIDTH=400
 export TOP_RIGHT_OFFSET=$(echo $(polybar -m | tail -1 | grep -oP '\d*(?=x)') 0 - $TOP_RIGHT_WIDTH - p | dc)
-export BOTTOM_RIGHT_WIDTH=500
+if [ "$MONITOR" == "eDP" ]
+then # laptop
+  export BOTTOM_RIGHT_WIDTH=200
+  polybar lapspecific -r &
+else # real computer
+  export BOTTOM_RIGHT_WIDTH=500
+fi
 export BOTTOM_RIGHT_OFFSET=$(echo $(polybar -m | tail -1 | grep -oP '\d*(?=x)') 0 - $BOTTOM_RIGHT_WIDTH - p | dc)
 
 polybar wm -r & 
 polybar topright -r &
+polybar topleft -r &
 polybar bottomright -r &
 )

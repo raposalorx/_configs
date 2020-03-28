@@ -3,7 +3,7 @@ text/html; elinks -dump -eval "set document.codepage.assume = %{charset}" %s; co
 #text/html;                      links -dump %s; nametemplate=%s.html; copiousoutput
 image/*;						feh --scale-down %s
 image/gif;						mirage %s
-application/pdf;				evince %s; nametemplate=%s.pdf
+application/pdf;				zathura %s; nametemplate=%s.pdf
 video/*;						mpv %s
 video/mp4;						mpv %s
 video/x-youtube;						mpv %s

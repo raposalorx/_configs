@@ -1,0 +1,10 @@
+# vim:ft=muttrc
+set realname = "Brian Robertson"
+set from = "brian@fulsome.ca"
+
+set folder = "~/.mail/brian@fulsome.ca"
+set record = "+sent"
+set spoolfile = "+inbox"
+set postponed = "+drafts"
+set mbox = "+archive"
+set move = no

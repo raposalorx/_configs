@@ -1,0 +1,51 @@
+#!/bin/bash
+
+orange="%{F#fe8019}"
+red="%{F#fb4934}"
+blue="%{F#83a598}"
+purple="%{F#d3869b}"
+grey="%{F#928374}"
+green="%{F#b8bb26}"
+yellow="%{F#fabd2f}"
+aqua="%{F#8ec07c}"
+fg="%{F#ebdbb2}"
+
+# grep -oP '\d*\.\d*_\d*\.[a-z]*,[^:]*:2,?[RFS]*F[RFS]*$'
+# grep -oP '\d*\.\d*_\d*\.[a-z]*(,[^:]*:2,?[^S]*$)?'
+
+todo_new=$(ls $HOME/.mail/todo@fulso.me/inbox/{new,cur} | grep -P '\d*\.\d*_\d*\.[a-z]*($|,[^:]*:2,?[^S]*$)' | wc -l)
+todo_cur=$(ls $HOME/.mail/todo@fulso.me/inbox/{new,cur} | grep -P '\d*\.\d*_\d*\.[a-z]*,[^:]*:2,?[RFS]*S[RFS]*$' | wc -l)
+todo_pin=$(ls $HOME/.mail/todo@fulso.me/inbox/{new,cur} | grep -P '\d*\.\d*_\d*\.[a-z]*,[^:]*:2,?[RFS]*F[RFS]*$' | wc -l)
+
+#todo_new=$(ls $HOME/.mail/todo@fulso.me/inbox/new | wc -l)
+#todo_cur=$(ls $HOME/.mail/todo@fulso.me/inbox/cur | wc -l)
+
+if [ $todo_new -gt 0 ]
+then
+  new_color=$yellow
+else
+  new_color=$aqua
+fi
+if [ $todo_cur -gt 0 ]
+then
+  cur_color=$yellow
+else
+  cur_color=$aqua
+fi
+if [ $todo_pin -gt 0 ]
+then
+  pin_color=$red
+else
+  pin_color=$aqua
+fi
+
+printf '%s' $pin_color
+printf '%s%s' $fg $todo_pin
+printf ' '
+printf '%s' $new_color
+printf '%s%s' $fg $todo_new
+printf ' '
+printf '%s' $cur_color
+printf '%s%s' $fg $todo_cur
+#'  '
+

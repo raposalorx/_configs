@@ -1,113 +1,88 @@
-#======================================================#
-# Boring details
-set realname = "Brian Robertson"
-set from = "raposa@msscripting.com"
-set use_from = yes
-set envelope_from ="yes"
+alternates "(brian@fulso.me)|\
+            (todo@fulso.me)|\
+            (brian@fulsome.ca)|\
+            (raposa\.msscripting@gmail\.com)|\
+            (raposa@msscripting\.com)|\
+            (brian\.robertson@gmail\.com)"
 
-alternates "(raposa\.msscripting@gmail\.com)|(raposa@msscripting\.com)|(brian\.robertson@gmail\.com)|(sandb@trulymagical\.ca)"
+set folder = "~/.mail" # set folder for mailboxes
+named-mailboxes "brian@fulso.me" +"brian@fulso.me/inbox"
+named-mailboxes "brian@fulsome.ca" +"brian@fulsome.ca/inbox"
+named-mailboxes "brian.robertson" +"brian.robertson@msscripting.com/inbox"
+named-mailboxes "raposa@msscripting.com" +"raposa@msscripting.com/inbox"
+named-mailboxes "raposa.msscripting" +"raposa.msscripting@gmail.com/inbox"
+named-mailboxes "TODO" +"todo@fulso.me/inbox" # folder indents are useless, manually add 2 spaces
+#named-mailboxes "  spa" +"todo@fulso.me/inbox/spam"
 
-macro index \e1 ":set from=raposa@msscripting.com\n:set status_format=\"-%r-raposa@msscripting.com: %f [Msgs:%?M?%M/?%m%?n? New:%n?%?o? Old:%o?%?d? Del:%d?%?F? Flag:%F?%?t? Tag:%t?%?p? Post:%p?%?b? Inc:%b?%?l? %l?]---(%s/%S)-%>-(%P)---\"\n" "Switch to raposa@msscripting.com"
-macro index \e2 ":set from=brian.robertson@msscripting.com\n:set status_format=\"-%r-brian.robertson@msscripting.com: %f [Msgs:%?M?%M/?%m%?n? New:%n?%?o? Old:%o?%?d? Del:%d?%?F? Flag:%F?%?t? Tag:%t?%?p? Post:%p?%?b? Inc:%b?%?l? %l?]---(%s/%S)-%>-(%P)---\"\n" "Switch to brian.robertson@msscripting.com"
-macro index \e3 ":set from=raposa.msscripting@gmail.com\n:set status_format=\"-%r-raposa.msscripting@gmail.com: %f [Msgs:%?M?%M/?%m%?n? New:%n?%?o? Old:%o?%?d? Del:%d?%?F? Flag:%F?%?t? Tag:%t?%?p? Post:%p?%?b? Inc:%b?%?l? %l?]---(%s/%S)-%>-(%P)---\"\n" "Switch to raposa.msscripting@gmail.com"
-macro index \e4 ":set from=sandb@trulymagical.ca\n:set status_format=\"-%r-sandb@trulymagical.ca: %f [Msgs:%?M?%M/?%m%?n? New:%n?%?o? Old:%o?%?d? Del:%d?%?F? Flag:%F?%?t? Tag:%t?%?p? Post:%p?%?b? Inc:%b?%?l? %l?]---(%s/%S)-%>-(%P)---\"\n" "Switch to sandb@trulymagical.ca"
-macro index \e0 "!mbsync -a\n"
+macro index \e1 '<sync-mailbox><enter-command>source ~/.mutt/brian@fulso.me.muttrc<enter><change-folder>!<enter>'
+macro index \e2 '<sync-mailbox><enter-command>source ~/.mutt/brian@fulsome.ca.muttrc<enter><change-folder>!<enter>'
+macro index \e3 '<sync-mailbox><enter-command>source ~/.mutt/brian.robertson@msscripting.com.muttrc<enter><change-folder>!<enter>'
+macro index \e4 '<sync-mailbox><enter-command>source ~/.mutt/raposa@msscripting.com.muttrc<enter><change-folder>!<enter>'
+macro index \e5 '<sync-mailbox><enter-command>source ~/.mutt/raposa.msscripting@gmail.com.muttrc<enter><change-folder>!<enter>'
+macro index \e9 '<sync-mailbox><enter-command>source ~/.mutt/todo@fulso.me.muttrc<enter><change-folder>!<enter>'
+macro index \e0 "!$HOME/.mutt/sync.sh\n"
 
-folder-hook gmail/* set from=raposa@msscripting.com
-folder-hook pmail/* set from=brian.robertson@msscripting.com
-folder-hook omail/* set from=raposa.msscripting@gmail.com
-folder-hook truly/* set from=sandb@trulymagical.ca
+folder-hook todo@fulso.me/* 'source ~/.mutt/todo@fulso.me.muttrc'
+folder-hook brian@fulso.me/* 'source ~/.mutt/brian@fulso.me.muttrc'
+folder-hook brian@fulsome.ca/* 'source ~/.mutt/brian@fulsome.ca.muttrc'
+folder-hook brian.robertson@msscripting.com/* 'source ~/.mutt/brian.robertson@msscripting.com.muttrc'
+folder-hook raposa@msscripting.com/* 'source ~/.mutt/raposa@msscripting.com.muttrc'
+folder-hook raposa.msscripting@gmail.com/* 'source ~/.mutt/raposa.msscripting@gmail.com.muttrc'
 
-# Use a signature
-#set signature="~/.signature"
-
-# Use msmtp rather than sendmail. Check that 
-# the path is correct for your system:
 set sendmail="/usr/bin/msmtp"
 
-# If not set in ~/.bashrc:
-# set spoolfile = /var/spool/mail/lorx
+set editor="nvim " 
+set edit_headers=no
+macro index,pager A "<pipe-message>khard add-email<return>" "add the sender address to contacts"
+set query_command="khard email -p '%s'"
+bind editor <Tab> complete-query
 
-#======================================================#
-# Folders
-set folder    = "$HOME/.mail"      # Local mailboxes stored here
-set record    = "+sent"           # Where to store sent messages
-set spoolfile = "+gmail/inbox"
-set postponed = "+postponed"   # Where to store draft messages
-set mbox_type = Maildir           # Mailbox type
-set mbox      = "+gmail/all_mail"
-set move      = no                  # Don't move mail from spool
+set use_from = yes
+set use_envelope_from ="yes" # generate FROM headers
+set mbox_type = Maildir
 
-set mail_check=0
-set delete
-unset confirmappend
-set quit
-unset mark_old
+set mail_check=5
+set delete # delete on sync
+unset confirmappend # append without asking
+set quit # quit quits
+unset mark_old # new just means new
+set sort = threads
+set sort_aux = last-date-sent
+set sort_alias = alias
+set sort_browser = unsorted
+set sort_re
 
-#set print_command = "muttprint"
+# Sidebar
+set sidebar_component_depth = 0
+set sidebar_delim_chars = "/"
+set sidebar_short_path
+set sidebar_folder_indent
+set sidebar_format = "%B%> %N/%S"
+set sidebar_sort_method = unsorted
+set sidebar_visible = yes
+set sidebar_width = 30
+
+# Mailing list followups
+set followup_to=yes
+set honor_followup_to=yes  
+
+set markers # mark wrapped lines of text in the pager with a +
+set smart_wrap
+set pager_context=20
+set status_on_top
+auto_view text/html
+
+# Print pdf to downloads
 set print_command  = "muttprint %s --printer TO_FILE:$HOME/Downloads/muttprint.eps && sleep 1 && ps2pdf $HOME/Downloads/muttprint.eps $HOME/Downloads/muttprint.pdf && rm $HOME/Downloads/muttprint.eps"
 
-#======================================================#
-# Watch these mailboxes for new mail, useful only if 
-# Procmail or Maildrop is used to sort mail.
-#mailboxes +"personal/inbox" +"old/inbox" +"old/ckule" +"old/lojbo" +"old/list" +"personal/trash" +"old/trash"
-mailboxes +"gmail/inbox" +"pmail/inbox" +"omail/inbox" +"truly/inbox"
-# ! +inbox +sent +todo +rss +lojban +lojban-beginners +lojban-announce +xedbig +ckule +jbofanva
-set sort_browser=reverse-size  # Sort mailboxes by alpha(bet)
-
-#======================================================#
-# What to show and order of headers
+# Headers to show
 ignore *
 unignore Date: From: User-Agent: X-Mailer X-Operating-System To: \
          Cc: Reply-To: Subject: Mail-Followup-To:
 hdr_order Date: From: User-Agent: X-Mailer X-Operating-System To: \
         Cc: Reply-To: Subject: Mail-Followup-To:
-                       
-#======================================================#
-# which editor do you want to use? 
-# vim of course!
-set editor="nvim " 
-set edit_headers=no      # See the headers when editing
-
-#======================================================#
-# Aliases
-
-#set alias_file = ~/.mutt_aliases # In their own file
-#source ~/.mutt_aliases           # Source them
-set sort_alias=alias                 # Sort alphabetically
-
-#set query_command= "abook --mutt-query '%s'" 
-#macro index,pager A "<pipe-message>abook --add-email-quiet<return>" "add the sender address to abook"
-#macro generic,index,pager \ca "<shell-escape>abook<return>" "launch abook"
-macro index,pager A "<pipe-message>khard add-email<return>" "add the sender address to contacts"
-set query_command="khard email -p '%s'"
-bind editor <Tab> complete-query
-
-#======================================================#
-# Colours: defaults are a little bleak so experiment!
 
 source ~/.mutt/gruvbox.muttrc
 source ~/.mutt/neogruvbox.muttrc
-
-#source ~/mutt/mutt_colors            # In their own file 
-#======================================================#
-# Lists: An example using the mutt-users list:
-
-#lists lojban jbofanva lojban-beginners xedbig vim_use
-#subscribe lojban jbofanva lojban-beginners xedbig vim_use
-set followup_to=yes        # Sets 'Mail-Followup-To' header
-set honor_followup_to=yes  
-fcc-hook mutt-user +mutt   # See your own posts using fcc
-
-#======================================================#
-# Odds and ends
-
-set markers          # mark wrapped lines of text in the pager with a +
-set smart_wrap       # Don't wrap mid-word
-set pager_context=20  # Retain 5 lines of previous page when scrolling.
-set status_on_top    # Status bar on top.
-push <show-version>  # Shows mutt version at startup
-auto_view text/html
-# auto_view image/jpeg
-# auto_view image/gif
-set sort=threads
+# Default, put after everything else
+source '~/.mutt/brian@fulso.me.muttrc'

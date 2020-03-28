@@ -1,5 +1,10 @@
 config/nvim/.netrwhist
 config/nvim/plugged/*
 
+config/ranger/bookmarks
+config/ranger/history
+
 tmux/resurrect
 tmux/plugins/tmux-*
+
+*.time
