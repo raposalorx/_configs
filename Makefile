@@ -1,6 +1,6 @@
 # Makefile for dotfiles (cf. https://github.com/pix/dotfiles)
 
-DOT_FILE = ${shell find . -maxdepth 1 -type f -a ! -path . -a ! -path './.*' -a ! -name 'Makefile' -a ! -name 'Session.vim' | sed -e 's/\:/\\:/g' -e 's,^\./,,g'} 
+DOT_FILE = ${shell find . -maxdepth 1 -type f -a ! -path . -a ! -path './.*' -a ! -name 'Makefile' -a ! -name 'Session.vim' -a ! -name 'crontab' | sed -e 's/\:/\\:/g' -e 's,^\./,,g'} 
 DOT_DIR = ${shell find . -maxdepth 1 -type d -a ! -path . -a ! -path './.*' -a ! -name 'config'  -a ! -name 'udev' -a ! -name 'xdm' | sed -e 's/\:/\\:/g' -e 's,^\./,,g'} 
 CONFIG_DIR = ${shell find ./config -maxdepth 1 -type d -a ! -path './config' -a ! -path './config/.*' | sed -e 's/\:/\\:/g' -e 's,^\./config/,,g'} 
 
