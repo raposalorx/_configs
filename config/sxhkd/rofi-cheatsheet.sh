@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Pull markdown files from cheatsheets folder
-GEN=$(find "$HOME/.config/cheatsheets/" -maxdepth 1 -type f -name '*.md' -printf '* %p')
+GEN=$(find "$HOME/.config/cheatsheets/" -maxdepth 1 -type f -name '*.md' -printf '* %p\n')
 
 # IFS for this statement only
 # Configs that are commented properly, append the markdown files

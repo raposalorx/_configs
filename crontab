@@ -1,3 +1,5 @@
+* * * * * $HOME/.bin/maria
+*/5 * * * * vdirsyncer sync
 * * * * * $HOME/.mutt/sync.sh "todo@fulso.me"
 * * * * * $HOME/.mutt/sync.sh "brian@fulso.me"
 * * * * * $HOME/.mutt/sync.sh "brian@fulsome.ca"

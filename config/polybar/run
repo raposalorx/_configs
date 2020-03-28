@@ -6,16 +6,21 @@ export CHECKMAIL=$HOME/.config/polybar/scripts/checkmail
 export TODO=$HOME/.config/polybar/scripts/todo
 export MONITOR=$(polybar -m | tail -1 | sed -e 's/:.*$//g')
 export NETWORK=$(ip addr | pcre2grep -M 'UP.*\n.*\n.*/24' | grep -oP '^\d*: \K[^:]*')
-export TOP_RIGHT_WIDTH=400
-export TOP_RIGHT_OFFSET=$(echo $(polybar -m | tail -1 | grep -oP '\d*(?=x)') 0 - $TOP_RIGHT_WIDTH - p | dc)
 if [ "$MONITOR" == "eDP" ]
 then # laptop
   export BOTTOM_RIGHT_WIDTH=200
+  export TOP_RIGHT_WIDTH=400
+  export TOP_LEFT_WIDTH=400
+  export WM_WIDTH=580
   polybar lapspecific -r &
 else # real computer
   export BOTTOM_RIGHT_WIDTH=500
+  export TOP_RIGHT_WIDTH=520
+  export TOP_LEFT_WIDTH=340
+  export WM_WIDTH=570
 fi
 export BOTTOM_RIGHT_OFFSET=$(echo $(polybar -m | tail -1 | grep -oP '\d*(?=x)') 0 - $BOTTOM_RIGHT_WIDTH - p | dc)
+export TOP_RIGHT_OFFSET=$(echo $(polybar -m | tail -1 | grep -oP '\d*(?=x)') 0 - $TOP_RIGHT_WIDTH - p | dc)
 
 polybar wm -r & 
 polybar topright -r &

@@ -3,6 +3,7 @@ config/nvim/plugged/*
 
 config/ranger/bookmarks
 config/ranger/history
+config/ranger/*.*bk
 
 tmux/resurrect
 tmux/plugins/tmux-*

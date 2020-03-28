@@ -18,9 +18,17 @@ super + Tab
 super + Escape
   pkill -USR1 -x sxhkd
 
+# Select background folders to use, shift+space for multi-select
+super + shift + b
+  ~/.config/sxhkd/rofi-backgrounds.sh
+
 # Show Cheatsheets
 super + shift + ctrl + Return
   ~/.config/sxhkd/rofi-cheatsheet.sh
+
+# Toggle Quake terminal
+super + ctrl + Return
+  ~/.config/sxhkd/quake.sh
 
 # }}}
 

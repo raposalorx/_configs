@@ -36,6 +36,6 @@ bspc config urgent_border_color '#fb4934'
 $HOME/.config/bspwm/subscriptions.sh
 
 # Rules
-bspc rule -a Cheatsheet state=floating sticky=on focus=on rectangle=600x400+383+30
+# bspc rule -a Cheatsheet state=floating sticky=on focus=on rectangle=600x400+383+30
 
 bspc config external_rules_command $HOME/.config/bspwm/external.sh
