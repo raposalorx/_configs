@@ -3,11 +3,9 @@
 sxhkd &
 compton --config ~/.config/compton/compton.conf -b & 
 $HOME/.config/polybar/run
-#feh --bg-fill ~/.backs/nature/0cGG4pV.jpg
 $HOME/.bin/backgrounds &
 dunst &
-#devmon --no-gui &
-#mpd &
+mpd &
 
 if [[ $(uname -n | grep -o 'lap$') == 'lap' ]]
 then

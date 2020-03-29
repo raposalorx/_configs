@@ -131,6 +131,13 @@ bottom = false
 width = ${env:TOP_LEFT_WIDTH}
 modules-left = todo left1 mail
 
+[bar/topcenter]
+inherit = bar/base
+bottom = false
+width = ${env:TOP_MIDDLE_WIDTH}
+offset-x = ${env:TOP_MIDDLE_OFFSET}
+modules-center = mpd
+
 [bar/bottomright]
 inherit = bar/base
 bottom = true
@@ -411,24 +418,16 @@ animation-discharging-framerate = 500
 type = internal/mpd
 host = 127.0.0.1
 port = 6600
-format-online =<icon-prev><label-song><icon-next>
-format-online-underline = ${colors.white}
+format-online = <label-song> <label-time>
 format-online-padding = 1
+format-online-background = ${color.bg}
+format-online-foreground = ${color.fg}
+format-offline-background = ${color.bg}
+format-offline-foreground = ${color.fg}
 
-label-song = %{A1:mpc toggle:}%artist% - %title%%{A}
-icon-play = 
-icon-pause = 
-icon-prev = 
-icon-next = 
-
-icon-prev-foreground = ${colors.darkgray} 
-icon-next-foreground = ${colors.darkgray}
-
-icon-play-padding = 1
-icon-pause-padding = 1
-icon-prev-padding = 1
-icon-next-padding = 1
-label-song-padding = 1
+label-song = %{F#83a598}%title:0:20:..% %{F-}- %{F#8ec07c}%artist:0:20:..%%{F-}
+label-time = %{F#d3869b}%elapsed% / %total%%{F-}
+label-offline = "🎜"
 ; }}}
 
 ; vim:ft=dosini
