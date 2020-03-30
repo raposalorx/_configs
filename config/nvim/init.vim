@@ -22,7 +22,6 @@ Plug 'godlygeek/tabular'
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'skywind3000/gutentags_plus'
 Plug 'mbbill/undotree'
-" Plug 'kassio/neoterm'
 
 "Plug 'davidhalter/jedi-vim'
 Plug 'junegunn/fzf', { 'do': './install --all' }

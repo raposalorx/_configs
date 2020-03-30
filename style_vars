@@ -1,0 +1,65 @@
+#!/bin/bash
+
+# {{{ Colours
+# Named colours
+export style_bg0_h="#1d2021"
+export style_bg0_s="#32302f"
+export style_bg0="#282828"
+export style_bg1="#3c3836"
+export style_bg2="#504945"
+export style_bg3="#665c54"
+export style_bg4="#7c6f64"
+export style_bg="$style_bg0"
+export style_fg0="#fbf1c7"
+export style_fg1="#ebdbb2"
+export style_fg2="#d5c4a1"
+export style_fg3="#bdae93"
+export style_fg4="#a89984"
+export style_fg="$style_fg1"
+export style_grey="#928374"
+export style_grey_b="$style_fg4"
+export style_red="#cc241d"
+export style_red_b="#fb4934"
+export style_green="#98971a"
+export style_green_b="#b8bb26"
+export style_yellow="#d79921"
+export style_yellow_b="#fabd2f"
+export style_blue="#458588"
+export style_blue_b="#83a598"
+export style_purple="#b16286"
+export style_purple_b="#d3869b"
+export style_aqua="#689d6a"
+export style_aqua_b="#8ec07c"
+export style_orange="#d65d0e"
+export style_orange_b="#fe8019"
+
+# Numbered colours
+export style_color0="$style_bg"
+export style_color8="$style_grey"
+export style_color1="$style_red"
+export style_color9="$style_red_b"
+export style_color2="$style_green"
+export style_color10="$style_green_b"
+export style_color3="$style_yellow"
+export style_color11="$style_yellow_b"
+export style_color4="$style_blue"
+export style_color12="$style_blue_b"
+export style_color5="$style_purple"
+export style_color13="$style_purple_b"
+export style_color6="$style_aqua"
+export style_color14="$style_aqua_b"
+export style_color7="$style_fg4"
+export style_color15="$style_fg1"
+
+# }}}
+
+# {{{ WM
+export style_window_gap=8
+export style_border_width=2
+
+export style_bar_height=24
+export style_bar_radius=$(echo "$style_bar_height 2 / p" | dc)
+
+export style_monitor_width="$(xrandr | grep -Po 'primary\s\K\d+(?=x)')"
+export style_monitor_height="$(xrandr | grep -Po 'primary\s\d*x\K\d*')"
+# }}}

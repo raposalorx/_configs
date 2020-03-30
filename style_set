@@ -1,0 +1,60 @@
+#!/bin/bash
+
+source "$HOME/.style_vars"
+
+#sed --follow-symlinks -i -r \
+#  -e 's/^(MATCH) .*/\1 "'"$STYLE_VAR"'"/' \
+#  "$HOME/.tmux.conf"
+
+# tmux
+sed --follow-symlinks -i -r \
+  -e 's/^(set -g status-fg) .*/\1 "'"$style_fg"'"/' \
+  -e 's/^(set-window-option -g window-status-current-fg) .*/\1 "'"$style_fg"'"/' \
+  -e 's/^(set -g pane-active-border-fg) .*/\1 "'"$style_fg"'"/' \
+  -e 's/^(set-window-option -g window-status-fg) .*/\1 "'"$style_grey"'"/' \
+  "$HOME/.tmux.conf"
+
+# termite
+sed --follow-symlinks -i -r \
+  -e 's/^(background) .*/\1 = '"$style_bg"'/' \
+  -e 's/^(foreground) .*/\1 = '"$style_fg"'/' \
+  -e 's/^(foreground_bold) .*/\1 = '"$style_fg"'/' \
+  -e 's/^(color0) .*/\1 = '"$style_color0"'/' \
+  -e 's/^(color8) .*/\1 = '"$style_color8"'/' \
+  -e 's/^(color1) .*/\1 = '"$style_color1"'/' \
+  -e 's/^(color9) .*/\1 = '"$style_color9"'/' \
+  -e 's/^(color2) .*/\1 = '"$style_color2"'/' \
+  -e 's/^(color10) .*/\1 = '"$style_color10"'/' \
+  -e 's/^(color3) .*/\1 = '"$style_color3"'/' \
+  -e 's/^(color11) .*/\1 = '"$style_color11"'/' \
+  -e 's/^(color4) .*/\1 = '"$style_color4"'/' \
+  -e 's/^(color12) .*/\1 = '"$style_color12"'/' \
+  -e 's/^(color5) .*/\1 = '"$style_color5"'/' \
+  -e 's/^(color13) .*/\1 = '"$style_color13"'/' \
+  -e 's/^(color6) .*/\1 = '"$style_color6"'/' \
+  -e 's/^(color14) .*/\1 = '"$style_color14"'/' \
+  -e 's/^(color7) .*/\1 = '"$style_color7"'/' \
+  -e 's/^(color15) .*/\1 = '"$style_color15"'/' \
+  "$HOME/.config/termite/config"
+
+# Xresources
+sed --follow-symlinks -i -r \
+  -e 's/^(\*background:) .*/\1 '"$style_bg"'/' \
+  -e 's/^(\*foreground:) .*/\1 '"$style_fg"'/' \
+  -e 's/^(\*color0:) .*/\1 '"$style_color0"'/' \
+  -e 's/^(\*color8:) .*/\1 '"$style_color8"'/' \
+  -e 's/^(\*color1:) .*/\1 '"$style_color1"'/' \
+  -e 's/^(\*color9:) .*/\1 '"$style_color9"'/' \
+  -e 's/^(\*color2:) .*/\1 '"$style_color2"'/' \
+  -e 's/^(\*color10:) .*/\1 '"$style_color10"'/' \
+  -e 's/^(\*color3:) .*/\1 '"$style_color3"'/' \
+  -e 's/^(\*color11:) .*/\1 '"$style_color11"'/' \
+  -e 's/^(\*color4:) .*/\1 '"$style_color4"'/' \
+  -e 's/^(\*color12:) .*/\1 '"$style_color12"'/' \
+  -e 's/^(\*color5:) .*/\1 '"$style_color5"'/' \
+  -e 's/^(\*color13:) .*/\1 '"$style_color13"'/' \
+  -e 's/^(\*color6:) .*/\1 '"$style_color6"'/' \
+  -e 's/^(\*color14:) .*/\1 '"$style_color14"'/' \
+  -e 's/^(\*color7:) .*/\1 '"$style_color7"'/' \
+  -e 's/^(\*color15:) .*/\1 '"$style_color15"'/' \
+  "$HOME/.Xresources"

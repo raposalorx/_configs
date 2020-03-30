@@ -1,5 +1,7 @@
 #!/bin/bash
 
+source "$HOME/.style_vars"
+
 wid="$1"
 class="$2"
 instance="$3"
@@ -12,25 +14,26 @@ fwid="$(bspc query -N -n focused.automatic)"
 
 if [ "$class" == "Quake" ]
 then
-  mwidth="$(xrandr | grep -Po 'primary\s\K\d+(?=x)')"
-  width="$(echo $mwidth 1.5/p | dc)"
-  offset="$(echo $mwidth 2/ $width 2/ - p | dc)"
+  width="$(echo $style_monitor_width 1.5/p | dc)"
+  offset="$(echo $style_monitor_width 2/ $width 2/ - p | dc)"
+  height="$(echo "$style_monitor_height 3/p" | dc)"
   echo "state=floating"
   echo "sticky=on"
   echo "focus=on"
   echo "border=off"
-  echo "rectangle=${width}x400+${offset}+0"
+  echo "rectangle=${width}x${height}+${offset}+0"
 fi
 
 if [ "$class" == "Cheatsheet" ]
 then
-  mwidth="$(xrandr | grep -Po 'primary\s\K\d+(?=x)')"
-  width="$(echo $mwidth 2/p | dc)"
-  offset="$(echo $mwidth 2/ $width 2/ - p | dc)"
+  width="$(echo "$style_monitor_width 2/p" | dc)"
+  height="$(echo "$style_monitor_height 2/p" | dc)"
+  offset="$(echo "$style_monitor_width 2/ $width 2/ - p" | dc)"
+  yoffset="$(echo "$style_window_gap 2 * $style_bar_height + p" | dc)" # 32
   echo "state=floating"
   echo "sticky=on"
   echo "focus=on"
-  echo "rectangle=${width}x400+${offset}+32"
+  echo "rectangle=${width}x${height}+${offset}+${yoffset}"
 fi
 
 if [ -n "$fwid" ]

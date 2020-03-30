@@ -20,6 +20,8 @@
 `:y a` copy range in to the a register. `:y A` append the range to the a register.
 
 # VISUAL
+`gv` reuse last visual selection
+
 Visual mode changes can be used as mode changes for movements.
 `d<c-V>2j` will convert the motion to blockwise and delete just the middle column.
 ```

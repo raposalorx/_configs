@@ -29,13 +29,13 @@ cursor_shape = block
 
 [colors]
 # hard contrast: background = #1d2021
-background = #262626
+background = #282828
 # soft contrast: background = #32302f
 foreground = #ebdbb2
 foreground_bold = #ebdbb2
 
 # dark0 + gray
-color0 = #262626
+color0 = #282828
 color8 = #928374
 
 # neutral_red + bright_red
