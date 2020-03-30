@@ -1,8 +1,8 @@
 {
   "document": {
-    "block_prefix": "",
-    "block_suffix": "",
-    "color": "7",
+    "block_prefix": "\n",
+    "block_suffix": "\n",
+    "color": "252",
     "indent": 2
   },
   "block_quote": {
@@ -14,20 +14,19 @@
     "level_indent": 2
   },
   "heading": {
-    "block_suffix": "",
+    "block_suffix": "\n",
     "color": "39",
     "bold": true
   },
   "h1": {
-    "prefix": "",
-    "suffix": "",
-    "color": "4",
+    "prefix": " ",
+    "suffix": " ",
+    "color": "2",
     "background_color": "",
     "bold": true
   },
   "h2": {
-    "prefix": "",
-    "color": "15"
+    "prefix": " "
   },
   "h3": {
     "prefix": "### "

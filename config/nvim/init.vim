@@ -21,6 +21,8 @@ Plug 'Yggdroot/indentLine'
 Plug 'godlygeek/tabular'
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'skywind3000/gutentags_plus'
+Plug 'mbbill/undotree'
+" Plug 'kassio/neoterm'
 
 "Plug 'davidhalter/jedi-vim'
 Plug 'junegunn/fzf', { 'do': './install --all' }
@@ -60,7 +62,7 @@ endif
 " set nocompatible
 set modelines=1
 set number
-" set relativenumber
+set relativenumber
 set scrolloff=3 " keep at least 3 lines at top or bottom while scrolling
 set showmode
 set showcmd
@@ -81,6 +83,9 @@ set history=1000 " history of :cmd
 set backupdir=~/.vim-tmp/backup//
 set directory=~/.vim-tmp/swp//
 set foldmethod=marker
+set foldcolumn=3 " Keep 2 levels of fold visually represented
+set lazyredraw " don't redraw during a macro.
+set inccommand=split
 
 " format options
 set formatoptions-=r " don't auto insert comment lines
@@ -128,12 +133,17 @@ nnoremap Y y$
 " I'm too used to jj for ESC and ^[
 " inoremap jj <ESC>
 
+" repeat macro instead of ex mode
+nnoremap Q @@
+
 " better search
 nnoremap / /\v
 vnoremap / /\v
-nnoremap ? ?\v
-vnoremap ? ?\v
-nnoremap % :%s/\v
+cnoremap %s/ %smagic/
+cnoremap >s/ >smagic/
+cnoremap .s/ .smagic/
+nnoremap :g/ :g/\v
+nnoremap :g// :g//
 set ignorecase
 set smartcase
 set gdefault
@@ -187,6 +197,8 @@ let g:UltiSnipsEditSplit='vertical'
 let g:UltiSnipsSnippetsDir=$HOME.'/.config/nvim/ultisnips/'
 let g:UltiSnipsSnippetDirectories=[$HOME.'/.config/nvim/ultisnips/']
 
+nnoremap <F5> :UndotreeToggle<cr>
+
 " switch ` and ' for marks
 nnoremap ' `
 nnoremap ` '
@@ -198,3 +210,11 @@ ca w!! w !sudo tee >/dev/null "%"
 map <F8> :setlocal spell spelllang=en_gb<CR>
 map <F10> :setlocal nospell<CR>
 "}}}
+" {{{ autocmd
+augroup always
+  autocmd!
+  " linenumbers in insert, relative everywhere else
+  au InsertEnter * set norelativenumber
+  au InsertLeave * set relativenumber
+augroup END
+" }}}

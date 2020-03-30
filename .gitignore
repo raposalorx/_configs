@@ -9,3 +9,4 @@ tmux/resurrect
 tmux/plugins/tmux-*
 
 *.time
+*.old

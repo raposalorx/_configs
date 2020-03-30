@@ -25,7 +25,7 @@ fi
 if [ "$class" == "Cheatsheet" ]
 then
   mwidth="$(xrandr | grep -Po 'primary\s\K\d+(?=x)')"
-  width="$(echo $mwidth 3/p | dc)"
+  width="$(echo $mwidth 2/p | dc)"
   offset="$(echo $mwidth 2/ $width 2/ - p | dc)"
   echo "state=floating"
   echo "sticky=on"
