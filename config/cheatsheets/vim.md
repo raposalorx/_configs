@@ -9,6 +9,8 @@
 `ctrl-R` insert register.
 
 # EX
+`:e!` or `:bufdo e!` reload buffer or all buffers
+
 `:g/regex/ex` runs ex command on lines that match.
 
 `:v` is the opposite of g. Runs commands on lines that don't match.
