@@ -1,0 +1,97 @@
+#!/bin/zsh
+
+# TODO TRASH
+
+cd /home/lorx/Downloads
+mkdir -p TRASH
+mkdir -p .processing
+
+fs=("${(@f)$(find -maxdepth 1 -type f)}")
+
+typeset -A assoc
+assoc=( mp4   video\
+        flv   video\
+        mkv   video\
+        mov   video\
+        webm  video\
+        wmv   video\
+        m4v   video\
+        gif   gif\
+        jpg   pic\
+        jpeg  pic\
+        JPEG  pic\
+        jpe   pic\
+        png   pic\
+        wav   music\
+        mp3   music\
+        mp4a  music\
+        tar   archive\
+        gz    archive\
+        tgz    archive\
+        rar   archive\
+        7z    archive\
+        zip   archive\
+        xz    archive\
+        txt   doc\
+        pdf   doc\
+        epub  doc\
+        xls   doc\
+        ppt   doc\
+        docx  doc\
+        exe   exe\
+        swf   exe\
+        xpi   exe\
+        sh    exe\
+        bin   exe\
+        c     code\
+        w     code\
+        h     code\
+        S     code\
+        brd   code\
+        sch   code\
+        vba   code\
+        hs    code\
+        lhs   code\
+        lua   code\
+        craft code\
+        html  code\
+        tex   code\
+        img   img\
+        iso   img\
+)
+
+## keep files we're working on out of the way so cron doesn't catch multiples if we take more than a minute
+for i in $fs; do
+  if lsof "$i" &> /dev/null ; then ; else # only use files that aren't open
+    mv "$i" .processing
+  fi
+done
+cd .processing
+
+for i in $fs; do
+  if lsof "$i" &> /dev/null ; then ; else # only use files that aren't open
+
+  # move torrents
+  if [[ "${i:e}" == "torrent" ]]; then
+    mv "$i" /media/tmp/
+
+  # organize stuff based off the assoc list above
+  else; if [[ "${assoc[${i:e}]}" != "" ]]; then
+    # type/year/month/
+    newdir=../${assoc[${i:e}]}/$(stat -c '%y' "$i" | sed -e 's,\([0-9]*\)-\([0-9]*\)-\([0-9]*\).*,\1/\2/,')
+    mkdir -p "$newdir"
+    mv "$i" "$newdir"
+
+    # open archives and keep the old file in TRASH for later cleanup
+    if [[ "${assoc[${i:e}]}" == "archive" ]]; then
+      mkdir -p "$newdir${i:t:r}/"
+      7z x -o"$newdir${i:t:r}" "$newdir$i"
+      mv "$newdir$i" ../TRASH
+    fi
+  else
+    mv "$i" ..
+  fi
+  fi
+  fi
+
+done

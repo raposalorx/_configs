@@ -1,0 +1,11 @@
+#!/bin/sh
+mkdir -p "$HOME/.thumbs"
+SUM=$(echo "$1" | md5sum | cut -f1 -d" ") # dont use filenames, might be fucked
+
+for i in $(seq 2 12 100) # 9 points from 2% to 98%
+do
+  ffmpegthumbnailer -i "$1" -o "$HOME/.thumbs/$SUM-$i.png" -t "$i%" -s 360
+done
+
+montage -border 0 -tile 3x3 -geometry +0+0 "$HOME/.thumbs/$SUM*.png" "$2"
+rm "$HOME/.thumbs/$SUM"*.png

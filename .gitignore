@@ -10,3 +10,4 @@ tmux/plugins/tmux-*
 
 *.time
 *.old
+rtorrent*

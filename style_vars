@@ -1,6 +1,7 @@
 #!/bin/bash
 
 # {{{ Colours
+# shellcheck source=/home/lorx/.style/gruvbox
 source "$HOME/.style/gruvbox"
 
 # BG/FG
@@ -55,8 +56,12 @@ export style_window_gap=8
 export style_border_width=2
 
 export style_bar_height=24
-export style_bar_radius=$(echo "$style_bar_height 2 / p" | dc)
+style_bar_radius=$(awk 'BEGIN{print '$style_bar_height'/2}')
+# $(echo "$style_bar_height 2 / p" | dc)
+export style_bar_radius
 
-export style_monitor_width="$(xrandr | grep -Po 'primary\s\K\d+(?=x)')"
-export style_monitor_height="$(xrandr | grep -Po 'primary\s\d*x\K\d*')"
+style_monitor_width="$(xrandr | grep -Po 'primary\s\K\d+(?=x)')"
+export style_monitor_width
+style_monitor_height="$(xrandr | grep -Po 'primary\s\d*x\K\d*')"
+export style_monitor_height
 # }}}

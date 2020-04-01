@@ -1,5 +1,6 @@
 #!/bin/bash
 
+# shellcheck source=/home/lorx/.style_vars
 source "$HOME/.style_vars"
 
 #sed --follow-symlinks -i -r \

@@ -5,18 +5,22 @@ GEN=$(find "$HOME/.config/cheatsheets/" -maxdepth 1 -type f -name '*.md' -printf
 
 # IFS for this statement only
 # Configs that are commented properly, append the markdown files
-IFS=$'\n' SHEETS=($(
-  printf "# $HOME/.config/sxhkd/sxhkdrc\n" \
-    && printf "$GEN"
-))
+#IFS=$'\n' SHEETS=($(
+#  printf "# $HOME/.config/sxhkd/sxhkdrc\n" \
+#    && printf "$GEN"
+#))
+mapfile -t SHEETS < <(
+  printf '# %s/.config/sxhkd/sxhkdrc\n' "$HOME" \
+    && printf '%s' "$GEN"
+      )
 
 # Create a dmenu menu with an index from sheets
 MENU="$(
-  for i in ${!SHEETS[@]}; do
+  for i in "${!SHEETS[@]}"; do
     PATH=${SHEETS[i]##* } # Remove delimiter and just leave path
     FILE=${PATH##*/}      # Remove path and just leave file
     TITLE=${FILE%%.*}     # Remove extension
-    printf '%s %s\n' $i $TITLE
+    printf '%s %s\n' "$i" "$TITLE"
   done
 )"
 
