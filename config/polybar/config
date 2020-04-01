@@ -41,6 +41,14 @@ yellow = ${env:style_yellow}
 blue = ${env:style_blue}
 purple = ${env:style_purple}
 aqua = ${env:style_aqua}
+orange_f = ${env:style_orange_f}
+grey_f = ${env:style_grey_f}
+red_f = ${env:style_red_f}
+green_f = ${env:style_green_f}
+yellow_f = ${env:style_yellow_f}
+blue_f = ${env:style_blue_f}
+purple_f = ${env:style_purple_f}
+aqua_f = ${env:style_aqua_f}
 orange_b = ${env:style_orange_b}
 grey_b = ${env:style_grey_b}
 red_b = ${env:style_red_b}
@@ -49,31 +57,6 @@ yellow_b = ${env:style_yellow_b}
 blue_b = ${env:style_blue_b}
 purple_b = ${env:style_purple_b}
 aqua_b = ${env:style_aqua_b}
-
-
-trans = #00000000
-
-[colors]
-;orange = #FF6200
-;orange = #d65d0e
-darkgray = ${xrdb:color8}
-orange = ${xrdb:color9}
-white = #ebdbb2
-gray = #585858
-black = #090909
-red = #c795ae
-blue = #95aec7
-yellow = #c7ae95
-green = #aec795
-#background = #1f222d
-background = #262626
-background-alt = #4e4e4e
-#foreground = #dfdfdf
-foreground = ${xrdb:foreground}
-foreground-alt = #4e4e4e
-primary = #1f222d
-secondary = #FF6200
-alert = #fb4934
 
 ; }}}
 ; {{{ Default
@@ -219,10 +202,7 @@ type = internal/bspwm
 format = <label-state> <label-mode>
 
 label-focused = %icon%
-;label-focused-background = ${colors.background-alt}
 label-focused-background = ${color.blue}
-;label-focused-underline= ${colors.primary}
-;label-focused-underline= ${colors.white}
 label-focused-foreground = ${color.bg}
 label-focused-padding = 1
 
@@ -290,7 +270,7 @@ ramp-volume-2 = 
 type = internal/cpu
 interval = 0.5
 format-background = ${color.bg1}
-format-foreground = ${color.orange}
+format-foreground = ${color.orange_b}
 label-padding = 1
 
 format = <ramp-coreload>
@@ -315,8 +295,6 @@ accumulate-stats = true
 
 label-connected-padding = 1
 label-disconnected-padding = 1
-format-connected-underline = ${colors.white}
-format-disconnected-underline = ${colors.white}
 
 format-connected-foreground = ${color.fg2}
 format-connected-background = ${color.bg2}
@@ -337,8 +315,6 @@ type = internal/date
 #date-alt =   %A %H:%M 
 date = %{F#928374}%{F-} %m/%d %H:%M:%S
 interval = 1
-format-underline = ${colors.white}
-;format-background = ${colors.black}
 format-foreground = ${color.fg3}
 format-background = ${color.bg3}
 label-padding = 1
@@ -374,7 +350,7 @@ mount-4 = /mnt/usb
 format-foreground = ${color.fg}
 label-mounted = %mountpoint%%{F#8ec07c} %free%
 label-unmounted = 
-label-unmounted-foreground = ${colors.foreground-alt}
+label-unmounted-foreground = ${color.grey}
 
 label-mounted-padding = 0
 label-unmounted-padding = 0
@@ -390,7 +366,7 @@ battery = BAT1
 poll-interval = 5
 format-full-foreground = ${color.green}
 format-charging-foreground = ${color.aqua}
-format-discharging-foreground = ${color.red}
+format-discharging-foreground = ${color.red_b}
 
 label-full = 
 format-charging = <animation-charging> <label-charging>

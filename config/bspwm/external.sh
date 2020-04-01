@@ -14,9 +14,9 @@ fwid="$(bspc query -N -n focused.automatic)"
 
 if [ "$class" == "Quake" ]
 then
-  width="$(echo $style_monitor_width 1.5/p | dc)"
-  offset="$(echo $style_monitor_width 2/ $width 2/ - p | dc)"
-  height="$(echo "$style_monitor_height 3/p" | dc)"
+  width="$(echo "$style_monitor_width 1.3 / p" | dc)"
+  offset="$(echo "$style_monitor_width 2 / $width 2/ - p" | dc)"
+  height="$(echo "$style_monitor_height 2/p" | dc)"
   echo "state=floating"
   echo "sticky=on"
   echo "focus=on"

@@ -5,6 +5,10 @@
 
 `g ctrl-A` Like `ctrl-A` but bumps the increment for each matching line.
 
+`Ctrl-w N +/-` moves horizontal splits, accepts a count N
+
+`Ctrl-w N >/<` moves vertical splits, accepts a count N
+
 # INSERT
 `ctrl-R` insert register.
 
@@ -40,3 +44,22 @@ abc
 
 # Standards to follow
 Use `;` as the inoremap leader because you shouldn't ever type it without a space or newline after.
+
+# Coc
+`gd` definition
+
+`gy` type definition
+
+`gi` implementation
+
+`gr` references
+
+`<leader>a` code action; Example: `<leader>aap` for current paragraph
+
+`<leader>ac` code action line
+
+`<leader>qf` quick fix current line
+
+`<leader>rn` rename symbol
+
+`[g` `]g` move forward and back in diagnostics

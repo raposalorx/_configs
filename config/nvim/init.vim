@@ -1,25 +1,23 @@
 " Plug {{{
 call plug#begin('~/.config/nvim/plugged')
-" ale linters needed:
-"   vint - vim
-"   shellcheck - sh/bash
-"   checkmake - Makefile
-"   yamllint - YAML
-"   hadolint - Dockerfile
-"   luac luacheck - lua
-"   perl-critic - perl
-"   flawfinder - c/++
-"   proselint writegood - text
-"
-"   python - flake8, pylint -- fixers: black, isort
-Plug 'w0rp/ale' " async linting
+" coc installs
+" :CocInstall coc-json                             ; json
+" :CocInstall coc-diagnostic                       ; general
+" :CocInstall coc-vimlsp                           ; viml
+" npm install -g vim-language-server               ; viml
+" npm i -g bash-language-server                    ; sh
+" Shellcheck                                       ; sh
+" shfmt                                            ; sh
+" npm install -g dockerfile-language-server-nodejs ; dockerfile
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
 Plug 'donRaphaco/neotex', { 'for': 'tex' }
 "Plug 'ledger/vim-ledger', { 'for': 'ledger' } " ledger
 Plug 'SirVer/ultisnips' " ultisnips
 Plug 'morhetz/gruvbox'
 Plug 'Yggdroot/indentLine'
 Plug 'godlygeek/tabular'
-Plug 'ludovicchabant/vim-gutentags'
+Plug 'ludovicchabant/vim-gutentags' " needs Exuberant Ctags or Universal Ctags
 Plug 'skywind3000/gutentags_plus'
 Plug 'mbbill/undotree'
 
@@ -86,6 +84,11 @@ set foldcolumn=3 " Keep 2 levels of fold visually represented
 set lazyredraw " don't redraw during a macro.
 set inccommand=split
 
+set cmdheight=1
+set updatetime=300
+set shortmess+=c
+set signcolumn=yes
+
 " format options
 set formatoptions-=r " don't auto insert comment lines
 set formatoptions-=o " ""
@@ -121,7 +124,8 @@ set statusline+=%1*%y%* "filetype
 set statusline+=%L "total lines
 set statusline+=%= "right align
 set statusline+=%{ObsessionStatus()}
-set statusline+=[%{LinterStatus()}]
+set statusline+=%{coc#status()}%{get(b:,'coc_current_function','')}
+"set statusline+=[%{LinterStatus()}]
 set statusline+=%{FugitiveStatusline()}
 "}}}
 
@@ -141,8 +145,8 @@ vnoremap / /\v
 cnoremap %s/ %smagic/
 cnoremap >s/ >smagic/
 cnoremap .s/ .smagic/
-nnoremap :g/ :g/\v
-nnoremap :g// :g//
+cnoremap g/ :g/\v
+cnoremap g// :g//
 set ignorecase
 set smartcase
 set gdefault
@@ -182,19 +186,19 @@ nnoremap <C-w><C-k> <C-w>K
 nnoremap <C-w><C-l> <C-w>L
 
 "ale keys
-nnoremap <leader>n :ALENextWrap<CR>
-nnoremap <leader>p :ALEPreviousWrap<CR>
+"nnoremap <leader>n :ALENextWrap<CR>
+"nnoremap <leader>p :ALEPreviousWrap<CR>
 
 "ultisnip
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
-let g:UltiSnipsExpandTrigger='<tab>'
-let g:UltiSnipsJumpForwardTrigger='<c-b>'
-let g:UltiSnipsJumpBackwardTrigger='<c-z>'
-
-" If you want :UltiSnipsEdit to split your window.
-let g:UltiSnipsEditSplit='vertical'
-let g:UltiSnipsSnippetsDir=$HOME.'/.config/nvim/ultisnips/'
-let g:UltiSnipsSnippetDirectories=[$HOME.'/.config/nvim/ultisnips/']
+"let g:UltiSnipsExpandTrigger='<tab>'
+"let g:UltiSnipsJumpForwardTrigger='<c-b>'
+"let g:UltiSnipsJumpBackwardTrigger='<c-z>'
+"
+"" If you want :UltiSnipsEdit to split your window.
+"let g:UltiSnipsEditSplit='vertical'
+"let g:UltiSnipsSnippetsDir=$HOME.'/.config/nvim/ultisnips/'
+"let g:UltiSnipsSnippetDirectories=[$HOME.'/.config/nvim/ultisnips/']
 
 nnoremap <F5> :UndotreeToggle<cr>
 

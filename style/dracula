@@ -1,0 +1,83 @@
+#!/bin/bash
+# Named colours
+export style_red="#FF5555" # red
+export style_green="#50FA7B" # green
+export style_yellow="#d79921" # yellow
+export style_blue="#BD93F9" # purple
+export style_purple="#FF79C6" # pink
+export style_aqua="#8BE9FD" # cyan
+export style_orange="#FFB86C" # orange
+
+export style_red_f="$style_red"
+export style_green_f="$style_green"
+export style_yellow_f="$style_yellow"
+export style_blue_f="$style_blue"
+export style_purple_f="$style_purple"
+export style_aqua_f="$style_aqua"
+export style_orange_f="$style_orange"
+
+export style_red_b="#FF6E6E" # red
+export style_green_b="#69FF94" # green
+export style_yellow_b="#FFFFA5" # yellow
+export style_blue_b="#D6ACFF" # purple
+export style_purple_b="#FF92DF" # pink
+export style_aqua_b="#A4FFFF" # cyan
+export style_orange_b="$style_orange" # orange
+
+export style_dark0="#191A21"
+export style_dark0_h="$style_dark0"
+export style_dark0_s="$style_dark0"
+export style_dark1="#21222C"
+export style_dark2="#282A36"
+export style_dark3="#343746"
+export style_dark4="#424450"
+export style_light0="#F8F8F2"
+export style_light0_h="$style_light0"
+export style_light0_s="$style_light0"
+export style_light1="$style_light0"
+export style_light2="$style_light0"
+export style_light3="$style_light0"
+export style_light4="$style_light0"
+export style_grey="#6272A4"
+export style_grey_b="$style_light0"
+
+# Bit colours
+export style_bit_red="203" # red
+export style_bit_green="84" # green
+export style_bit_yellow="228" # yellow
+export style_bit_blue="141" # purple
+export style_bit_purple="212" # pink
+export style_bit_aqua="117" # cyan
+export style_bit_orange="215" # orange
+
+export style_bit_red_f="$style_bit_red"
+export style_bit_green_f="$style_bit_green"
+export style_bit_yellow_f="$style_bit_yellow"
+export style_bit_blue_f="$style_bit_blue"
+export style_bit_purple_f="$style_bit_purple"
+export style_bit_aqua_f="$style_bit_aqua"
+export style_bit_orange_f="$style_bit_orange"
+
+export style_bit_red_b="$style_bit_red"
+export style_bit_green_b="$style_bit_green"
+export style_bit_yellow_b="$style_bit_yellow"
+export style_bit_blue_b="$style_bit_blue"
+export style_bit_purple_b="$style_bit_purple"
+export style_bit_aqua_b="$style_bit_aqua"
+export style_bit_orange_b="$style_bit_orange"
+
+export style_bit_dark0="234"
+export style_bit_dark0_h="$style_bit_dark0"
+export style_bit_dark0_s="$style_bit_dark0"
+export style_bit_dark1="235"
+export style_bit_dark2="236"
+export style_bit_dark3="237"
+export style_bit_dark4="238"
+export style_bit_light0="253"
+export style_bit_light0_h="$style_bit_light0"
+export style_bit_light0_s="$style_bit_light0"
+export style_bit_light1="$style_bit_light0"
+export style_bit_light2="$style_bit_light0"
+export style_bit_light3="$style_bit_light0"
+export style_bit_light4="$style_bit_light0"
+export style_bit_grey="61"
