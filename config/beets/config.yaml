@@ -1,0 +1,17 @@
+---
+directory: ~/music/music/
+library: ~/music/beet.db
+
+plugins: fetchart lyrics edit
+
+threaded: true
+
+import:
+  write: true
+  move: true
+  resume: true
+  duplicate_action: merge
+
+musicbrainz:
+  host: localhost:5000
+  ratelimit: 100

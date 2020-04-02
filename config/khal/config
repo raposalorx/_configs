@@ -1,0 +1,30 @@
+[calendars]
+
+[[raposa]]
+path = "~/.calendars/raposa@msscripting.com"
+color = light blue
+
+[[contacts]]
+path = "~/.calendars/4dhmurjkc5hn8sq0ctp6utbg5pr2sor1dhimsp31e8n6errfctm6abj3dtmg@virtual"
+readonly = True
+color = yellow
+
+[[holidays]]
+path = "~/.calendars/cln2sor1dpgm8qb1dohmgrrcd5i62ua0ctp6utbg5pr2sor1dhimsp31e8n6errfctm6abj3dtmg@virtual"
+readonly = True
+color = light green
+
+[default]
+default_calendar = "raposa"
+highlight_event_days = True
+timedelta = 15d
+
+[highlight_days]
+color = ''
+
+[locale]
+timeformat = %H:%M
+dateformat = %d/%m/%Y
+longdateformat = %d/%m/%Y
+datetimeformat = %d/%m/%Y %H:%M
+longdatetimeformat = %d/%m/%Y %H:%M

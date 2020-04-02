@@ -185,23 +185,6 @@ nnoremap <C-w><C-j> <C-w>J
 nnoremap <C-w><C-k> <C-w>K
 nnoremap <C-w><C-l> <C-w>L
 
-"ale keys
-"nnoremap <leader>n :ALENextWrap<CR>
-"nnoremap <leader>p :ALEPreviousWrap<CR>
-
-"ultisnip
-" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
-"let g:UltiSnipsExpandTrigger='<tab>'
-"let g:UltiSnipsJumpForwardTrigger='<c-b>'
-"let g:UltiSnipsJumpBackwardTrigger='<c-z>'
-"
-"" If you want :UltiSnipsEdit to split your window.
-"let g:UltiSnipsEditSplit='vertical'
-"let g:UltiSnipsSnippetsDir=$HOME.'/.config/nvim/ultisnips/'
-"let g:UltiSnipsSnippetDirectories=[$HOME.'/.config/nvim/ultisnips/']
-
-nnoremap <F5> :UndotreeToggle<cr>
-
 " switch ` and ' for marks
 nnoremap ' `
 nnoremap ` '

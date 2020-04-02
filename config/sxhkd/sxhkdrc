@@ -30,6 +30,10 @@ super + shift + ctrl + Return
 super + ctrl + Return
   ~/.config/sxhkd/quake.sh
 
+# Pick music source
+super + shift + m
+  ~/.config/sxhkd/rofi-music.sh
+
 # }}}
 
 # bspwm {{{

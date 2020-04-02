@@ -6,7 +6,7 @@ redshift -m randr -l 51.0486:'-114.0708' &
 "$HOME/.config/polybar/run"
 "$HOME/.bin/backgrounds" &
 dunst &
-mpd &
+musicsource mpd
 
 "$HOME/.config/bspwm/rules.sh"
 

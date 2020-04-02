@@ -87,7 +87,7 @@ underline-size = 0
 underline-color = ${color.fg}
 
 tray-detached = false
-tray-position = 
+tray-position = right
 tray-offset-x = 0
 tray-offset-y = 0
 ;tray-maxsize = 16
@@ -324,14 +324,14 @@ label-separator = |
 ; {{{ topleft
 [module/mail]
 type = custom/script
-exec = ${env:CHECKMAIL}
+exec = scripts/checkmail
 interval = 5
 format-background = ${color.bg}
 label-padding = 1
 
 [module/todo]
 type = custom/script
-exec = ${env:TODO}
+exec = scripts/todo
 interval = 5
 format-background = ${color.bg1}
 label-padding = 1
@@ -388,6 +388,14 @@ animation-discharging-3 = 
 animation-discharging-4 = 
 animation-discharging-framerate = 500
 ; }}}
+[module/spotify]
+type = custom/script
+interval = 1
+format-prefix = " "
+format = <label>
+exec = python scripts/spotify_status.py -f '{song} - {artist}'
+format-underline = #1db954
+
 [module/mpd]
 type = internal/mpd
 host = 127.0.0.1

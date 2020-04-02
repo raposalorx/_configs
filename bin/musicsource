@@ -1,0 +1,47 @@
+#!/bin/bash
+
+if [ -z "$1" ]; then
+  exit 1
+fi
+
+mopidy_pid="$(pgrep mopidy)"
+mpd_pid="$(pgrep mpd)"
+
+case "$1" in
+  mpd)
+    if [ "$mopidy_pid" != "" ]; then
+      echo killing mopidy and starting mpd
+      kill "$mopidy_pid"
+      launch mpd
+      exit 0
+    elif [ "$mpd_pid" != "" ]; then
+      echo mpd already running
+      exit 0
+    else
+      echo starting mpd
+      launch mpd
+      exit 0
+    fi
+    exit 1
+    ;;
+  mopidy)
+    if [ "$mopidy_pid" != "" ]; then
+      echo mopidy already running
+      exit 0
+    elif [ "$mpd_pid" != "" ]; then
+      echo killing mpd and starting mopidy
+      kill "$mpd_pid"
+      launch mopidy
+      exit 0
+    else
+      echo starting mopidy
+      launch mopidy
+      exit 0
+    fi
+    exit 1
+    ;;
+  *)
+    echo Pick either mpd or mopidy
+    exit 1
+    ;;
+esac

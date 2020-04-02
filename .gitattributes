@@ -1,2 +1,3 @@
 mbsyncrc filter=git-crypt diff=git-crypt
 msmtprc filter=git-crypt diff=git-crypt
+mopidy.conf filter=git-crypt diff=git-crypt
