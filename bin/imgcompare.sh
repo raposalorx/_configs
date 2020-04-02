@@ -6,6 +6,10 @@
 # :%!bash
 # :q!
 
+# TODO
+# breakout into parallel
+# 
+
 dir=
 cutoff=
 files=()

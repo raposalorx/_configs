@@ -73,6 +73,7 @@ enable-ipc = true
 radius = ${env:style_bar_radius}
 height = ${env:style_bar_height}
 offset-y = ${env:style_window_gap}
+offset-x = ${env:style_window_gap}
 
 padding-left = 0
 padding-right = 0

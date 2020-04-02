@@ -22,8 +22,8 @@ else # real computer
   export TOP_MIDDLE_WIDTH=430
   export WM_WIDTH=570
 fi
-export BOTTOM_RIGHT_OFFSET=$(echo $(polybar -m | tail -1 | grep -oP '\d*(?=x)') 0 - $BOTTOM_RIGHT_WIDTH - p | dc)
-export TOP_RIGHT_OFFSET=$(echo $(polybar -m | tail -1 | grep -oP '\d*(?=x)') 0 - $TOP_RIGHT_WIDTH - p | dc)
+export BOTTOM_RIGHT_OFFSET=$(echo $(polybar -m | tail -1 | grep -oP '\d*(?=x)') $style_window_gap - $BOTTOM_RIGHT_WIDTH - p | dc)
+export TOP_RIGHT_OFFSET=$(echo $(polybar -m | tail -1 | grep -oP '\d*(?=x)') $style_window_gap - $TOP_RIGHT_WIDTH - p | dc)
 export TOP_MIDDLE_OFFSET=$(echo $(polybar -m | tail -1 | grep -oP '\d*(?=x)') 2 / $TOP_MIDDLE_WIDTH  2 / - p | dc)
 
 polybar wm -r & 
