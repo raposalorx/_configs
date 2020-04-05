@@ -1,6 +1,7 @@
 #!/bin/bash
 
 # {{{ Colours
+
 # shellcheck source=/home/lorx/.style/gruvbox
 source "$HOME/.style/gruvbox"
 
