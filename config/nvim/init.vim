@@ -9,10 +9,17 @@ call plug#begin('~/.config/nvim/plugged')
 " Shellcheck                                       ; sh
 " shfmt                                            ; sh
 " npm install -g dockerfile-language-server-nodejs ; dockerfile
+" haskell-ide-engine                               ; haskell
+" brittany                                         ; haskell
+" hlint                                            ; haskell
+" refact                                           ; haskell
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
+Plug 'neovimhaskell/haskell-vim', { 'for': 'haskell' }
 Plug 'donRaphaco/neotex', { 'for': 'tex' }
 "Plug 'ledger/vim-ledger', { 'for': 'ledger' } " ledger
+"Plug 'davidhalter/jedi-vim'
+
 Plug 'SirVer/ultisnips' " ultisnips
 Plug 'morhetz/gruvbox'
 Plug 'Yggdroot/indentLine'
@@ -21,7 +28,6 @@ Plug 'ludovicchabant/vim-gutentags' " needs Exuberant Ctags or Universal Ctags
 Plug 'skywind3000/gutentags_plus'
 Plug 'mbbill/undotree'
 
-"Plug 'davidhalter/jedi-vim'
 Plug 'junegunn/fzf', { 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 
@@ -29,6 +35,7 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-obsession'
+Plug 'tpope/vim-commentary'
 
 call plug#end()
 "}}}

@@ -22,12 +22,12 @@ while true;
 do
 
 # Don't quote DIRS, we want the spaces to split out
-pics=`find -L $DIRS -maxdepth 1 -type f -name '*.jpg' -o -name '*.jpeg' -o -name '*.png' | shuf`
+readarray -d '' pics < <(find -L $DIRS -maxdepth 1 -type f \( -name '*.jpg' -o -name '*.jpeg' -o -name '*.png' \) -print0 | shuf -z)
 #for i in $pics; do
 #dunstify --appname="Backgrounds"  --urgency=low --icon="$i" Backgrounds "$(IFS=$'\n'; echo "${FOLDERS[*]}")"
 #break
 #done
-for i in $pics
+for i in "${pics[@]}"
 do
 #    convert "$i" -geometry 1920x1080 -gravity center -background black -extent 1920x1080 $HOME/.swap.png
     echo "$i"
