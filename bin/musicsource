@@ -7,19 +7,32 @@ fi
 mopidy_pid="$(pgrep mopidy)"
 mpd_pid="$(pgrep mpd)"
 
+run_mpd ()
+{
+  if [ "$mpd_pid" == "" ]; then
+    ~/.bin/launch mpd
+  fi
+}
+run_mopidy ()
+{
+  if [ "$mopidy_pid" == "" ]; then
+    ~/.bin/launch mopidy
+  fi
+}
+
 case "$1" in
   mpd)
     if [ "$mopidy_pid" != "" ]; then
       echo killing mopidy and starting mpd
       kill "$mopidy_pid"
-      launch mpd
+      run_mpd
       exit 0
     elif [ "$mpd_pid" != "" ]; then
       echo mpd already running
       exit 0
     else
       echo starting mpd
-      launch mpd
+      run_mpd
       exit 0
     fi
     exit 1
@@ -31,11 +44,11 @@ case "$1" in
     elif [ "$mpd_pid" != "" ]; then
       echo killing mpd and starting mopidy
       kill "$mpd_pid"
-      launch mopidy
+      run_mopidy
       exit 0
     else
       echo starting mopidy
-      launch mopidy
+      run_mopidy
       exit 0
     fi
     exit 1

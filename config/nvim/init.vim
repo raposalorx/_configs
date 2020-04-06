@@ -13,6 +13,10 @@ call plug#begin('~/.config/nvim/plugged')
 " brittany                                         ; haskell
 " hlint                                            ; haskell
 " refact                                           ; haskell
+" :CocInstall coc-python                           ; python
+" pip install pylint                               ; python
+" pip install autopep8                             ; python
+" pip install jedi-language-server                 ; python
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 Plug 'neovimhaskell/haskell-vim', { 'for': 'haskell' }
@@ -130,8 +134,9 @@ set statusline+=%f "filename
 set statusline+=%1*%y%* "filetype
 set statusline+=%L "total lines
 set statusline+=%= "right align
-set statusline+=%{ObsessionStatus()}
 set statusline+=%{coc#status()}%{get(b:,'coc_current_function','')}
+set statusline+=%= "right align
+set statusline+=%{ObsessionStatus()}
 "set statusline+=[%{LinterStatus()}]
 set statusline+=%{FugitiveStatusline()}
 "}}}

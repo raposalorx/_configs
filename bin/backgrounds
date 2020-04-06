@@ -2,38 +2,53 @@
 
 # There can only be one
 pgrep "${0##*/}" | grep -P '^((?!'$$').)*$' | xargs -L 1 kill
+killall xwinwrap
 
 # Make sure we at least have the base dir
 FOLDERS=("$@")
-if (( ! ${#FOLDERS[@]} ))
-then
+if ((!${#FOLDERS[@]})); then
   FOLDERS=('.')
   feh --bg-fill "$HOME/.backs/0cGG4pV.jpg"
   sleep 1m
 fi
 
 # Make them global
-DIRS=$(for i in "${FOLDERS[@]}"
-do
+DIRS=$(for i in "${FOLDERS[@]}"; do
   printf "$HOME/.backs/%s " "$i"
 done)
 
-while true;
-do
+while true; do
 
-# Don't quote DIRS, we want the spaces to split out
-readarray -d '' pics < <(find -L $DIRS -maxdepth 1 -type f \( -name '*.jpg' -o -name '*.jpeg' -o -name '*.png' \) -print0 | shuf -z)
-#for i in $pics; do
-#dunstify --appname="Backgrounds"  --urgency=low --icon="$i" Backgrounds "$(IFS=$'\n'; echo "${FOLDERS[*]}")"
-#break
-#done
-for i in "${pics[@]}"
-do
-#    convert "$i" -geometry 1920x1080 -gravity center -background black -extent 1920x1080 $HOME/.swap.png
+  # Don't quote DIRS, we want the spaces to split out
+  readarray -d '' pics < <(find -L $DIRS -maxdepth 1 -type f \( -name '*.jpg' -o -name '*.jpeg' -o -name '*.png' -o -name '*.gif' -o -name '*.webm' -o -name '*.mp4' \) -print0 | shuf -z)
+  #for i in $pics; do
+  #dunstify --appname="Backgrounds"  --urgency=low --icon="$i" Backgrounds "$(IFS=$'\n'; echo "${FOLDERS[*]}")"
+  #break
+  #done
+  for i in "${pics[@]}"; do
+    #    convert "$i" -geometry 1920x1080 -gravity center -background black -extent 1920x1080 $HOME/.swap.png
     echo "$i"
-    feh --bg-fill "$i"
+    EXT="${i##*.}"
+    echo "$EXT"
+    if [ "$EXT" == "gif" ] || [ "$EXT" == "webm" ] || [ "$EXT" == "mp4" ]; then
+      echo ani
+      GEO="$( xrandr -q | grep ' connected' | grep -oP '\d+x\d+\+\d+\+\d+')"
+      hsetroot
+      killall xwinwrap
+      xwinwrap -ov -g "$GEO" -- mpv --fullscreen\
+        --on-all-workspaces \
+        --no-stop-screensaver \
+        --no-input-default-bindings \
+        --no-config \
+        --loop-file --no-audio --no-osc --no-osd-bar -wid WID --quiet \
+        "$i" --background="#000000" &
+      # -- video-zoom
+      sleep 30m
+    else
+      feh --bg-fill "$i"
+    sleep 1m
+    fi
     #feh --bg-center $HOME/.swap.png
     #rm $HOME/.swap.png
-    sleep 1m
-done
+  done
 done
